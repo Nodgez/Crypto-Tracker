@@ -11,18 +11,20 @@ public class CoinTracker : MonoBehaviour
 {
     private const string TRACKEDCOINSKEY = "addedCoinsForTracking";
     private const string ALLCOINSKEY = "allCoins";
+    private const string PURCHASEHISTORY = "purchaseHistory";
     [SerializeField]
     private CoinTrack coinTrackPrefab;
     [SerializeField]
-    private Button addCoinPrefab;
+    private PurchaseHistoryTrack purchaseHistoryPrefab;
     [SerializeField]
-    private ScrollRect trackedCoinsContainer;
+    private ScrollRect trackedCoinsContainer, purchaseHistoryContainer;
     
     private JSONNode allCoinGeckoCoins;
     private JSONNode localCoinsToTrack = JSON.Parse("{}");
 
     private Dictionary<string, Coin> trackedCoins = new Dictionary<string, Coin>();
     private Dictionary<string, CoinTrack> coinTracks = new Dictionary<string, CoinTrack>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +42,18 @@ public class CoinTracker : MonoBehaviour
         StartCoroutine(RefreshTrackedCoins());
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            AddPurchase("bitcoin", new Trade() {
+                Date = DateTime.Now.ToShortDateString(),
+                CoinPrice= 0,
+                PricePaid = 0,
+                CoinValue = 0
+            });
+        }
+    }
 
     IEnumerator GetRequest(string uri, Action<string> responseCallback)
     {
@@ -198,6 +212,26 @@ public class CoinTracker : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
     }
+
+    [MenuItem("Data Helper/Clear Purchase History")]
+    static void ClearPurchaseHistory()
+    {
+        PlayerPrefs.DeleteKey(PURCHASEHISTORY);
+    }
+
+    public void AddPurchase(string coin, Trade trade)
+    {
+        var purchaseObject = JSON.Parse(PlayerPrefs.GetString(PURCHASEHISTORY, "{ }"));
+        if (purchaseObject["bitcoin"] == null)
+            purchaseObject.Add("bitcoin", JSON.Parse("[]"));
+
+        var tradeFormatted = trade.FormatToJSON();
+        purchaseObject["bitcoin"].AsArray.Add(tradeFormatted);
+
+        PlayerPrefs.SetString(PURCHASEHISTORY, purchaseObject.ToString());
+        Debug.Log(purchaseObject);
+        //var purchaseTrack = Instantiate(purchaseHistoryPrefab, purchaseHistoryContainer.content);
+    }
 }
 
 public struct Coin
@@ -206,4 +240,17 @@ public struct Coin
     public string Name;
     public double EuroAverage;
     public double CurrentPrice;
+}
+
+public struct Trade
+{
+    public string Date;
+    public double PricePaid;
+    public double CoinValue;
+    public double CoinPrice;
+
+    public string FormatToJSON()
+    {
+        return string.Format("{{date: {0}, pricePaid: {1}, coinValue: {2}, coinPrice: {3}}}", Date, PricePaid, CoinValue, CoinPrice);
+    }
 }

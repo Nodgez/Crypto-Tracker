@@ -1,0 +1,45 @@
+[
+    {
+        "Key": "Trades",
+        "Value": {
+            "entries": [
+                {
+                    "Key": "coin",
+                    "Value": {
+                        "selected": true,
+                        "data": {
+                            "purchase_date": {
+                                "StringType": {
+                                    "_string": "19-2-2021",
+                                    "InitValue": null,
+                                    "$type": "StringType"
+                                }
+                            },
+                            "purchase_price": {
+                                "DoubleType": {
+                                    "_double": 100.04,
+                                    "InitValue": 0.0,
+                                    "$type": "DoubleType"
+                                }
+                            },
+                            "coin_value": {
+                                "DoubleType": {
+                                    "_double": 42779.0,
+                                    "InitValue": 0.0,
+                                    "$type": "DoubleType"
+                                }
+                            },
+                            "coin_quantity": {
+                                "DoubleType": {
+                                    "_double": 0.00227,
+                                    "InitValue": 0.0,
+                                    "$type": "DoubleType"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+]
