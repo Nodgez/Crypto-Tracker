@@ -17,4 +17,12 @@ public static class Extensions
         canvasGrp.blocksRaycasts = false;
         canvasGrp.interactable = false;
     }
+
+    public static void ClearChildren(this Transform t)
+    {
+        for (int i = t.childCount - 1; i > -1; i--)
+        {
+            GameObject.Destroy(t.GetChild(i).gameObject);
+        }
+    }
 }
