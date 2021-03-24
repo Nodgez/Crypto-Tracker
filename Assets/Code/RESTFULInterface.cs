@@ -18,7 +18,7 @@ public class RESTFULInterface
 
     public IEnumerator GetRequest(string uri, Action<string> responseCallback)
     {
-        Debug.Log("sending request to: " + uri);
+        //Debug.Log("sending request to: " + uri);
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
         {
             yield return webRequest.SendWebRequest();
@@ -41,7 +41,7 @@ public class RESTFULInterface
 
     public IEnumerator GetRequest(string uri, Action<Texture2D> responseCallback)
     {
-        Debug.Log("sending request to: " + uri);
+        //Debug.Log("sending request to: " + uri);
 
         using (var webRequest = UnityWebRequestTexture.GetTexture(uri))
         {

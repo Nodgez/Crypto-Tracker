@@ -10,7 +10,7 @@ public class TradePanel : MonoBehaviour
     private const string PURCHASEHISTORY = "purchaseHistory";
 
     [SerializeField]
-    private Text totalSpendText, totalQuantityText, averageBuyInText;
+    private Text totalSpendText, totalQuantityText, averageBuyInText, coinName;
     [SerializeField]
     private InputField dateInput, pricePaidInput, quantityInput;
     [SerializeField]
@@ -53,6 +53,7 @@ public class TradePanel : MonoBehaviour
     public void OpenTradesForCoin(string coin)
     {
         openCoinID = coin;
+        coinName.text = coin;
         DisplayAllPurchases(openCoinID);
         tradesUI.On();
     }

@@ -11,9 +11,10 @@ using UnityEngine.Networking;
 public class CoinTracker : MonoBehaviour
 {
     [SerializeField]
-    private Image background;
+    private Dropdown retrospectDropdown;
+    [SerializeField]
+    private Button refreshButton;
 
-    private const string TRACKEDCOINSKEY = "addedCoinsForTracking";
     [SerializeField]
     private CoinTrack coinTrackPrefab;
     [SerializeField]
@@ -25,10 +26,13 @@ public class CoinTracker : MonoBehaviour
     private Dictionary<string, Coin> trackedCoins = new Dictionary<string, Coin>();
     private Dictionary<string, CoinTrack> coinTracks = new Dictionary<string, CoinTrack>();
     private string coinPath;
+    private int retroSpect = 30;
     // Start is called before the first frame update
     void Start()
     {
         coinPath = Path.Combine(Application.persistentDataPath, "coins.json");
+        retrospectDropdown.onValueChanged.AddListener(OnRetrospectChange);
+
         StartCoroutine(InitializeTracker());        
     }
 
@@ -36,23 +40,29 @@ public class CoinTracker : MonoBehaviour
     {
         yield return StartCoroutine(RESTFULInterface.Instance.GetRequest("https://api.coingecko.com/api/v3/coins/list", (response) =>
         {
+            if (response.Contains("Error"))
+            {
+                return;
+            }
             allCoinGeckoCoins = JSON.Parse(response);
         }));
-
-        yield return StartCoroutine(RESTFULInterface.Instance.GetRequest("https://picsum.photos/1920/1080?grayscale&blur=5", RetrievedBackground));
 
         var coinsFile = File.ReadAllText(coinPath);
         localCoinsToTrack = JSON.Parse(coinsFile);
         foreach (JSONNode n in localCoinsToTrack.AsArray)
             CreateTrackForCoin(n);
-
-        yield return StartCoroutine(RefreshTrackedCoins());
+        Refresh();
     }
 
-    void UpdateEuroCostAverage(string coin, int days, string frequency)
+    public void Refresh()
+    {
+        StartCoroutine(RefreshTrackedCoins());
+    }
+
+    Coroutine UpdateEuroCostAverage(string coin, int days, string frequency)
     {
         var url = "https://api.coingecko.com/api/v3/coins/" + coin + "/market_chart?vs_currency=eur&days=" + days + "&interval=" + frequency;
-        StartCoroutine(RESTFULInterface.Instance.GetRequest(url,(responseData) => {
+        return StartCoroutine(RESTFULInterface.Instance.GetRequest(url,(responseData) => {
 
             if (responseData.Contains("Error"))
             {
@@ -75,10 +85,10 @@ public class CoinTracker : MonoBehaviour
         }));
     }
 
-    void UpdateInvestmentAverage(string coin, int days, string frequency)
+    Coroutine UpdateInvestmentAverage(string coin, int days, string frequency)
     {
         var url = "https://api.coingecko.com/api/v3/coins/" + coin + "/market_chart?vs_currency=eur&days=" + days + "&interval=" + frequency;
-        StartCoroutine(RESTFULInterface.Instance.GetRequest(url, (responseData) => {
+        return StartCoroutine(RESTFULInterface.Instance.GetRequest(url, (responseData) => {
 
             if (responseData.Contains("Error"))
             {
@@ -87,6 +97,7 @@ public class CoinTracker : MonoBehaviour
             }
 
             var jsonData = JSON.Parse(responseData)["prices"];
+            Debug.Log(jsonData);
             var count = jsonData.Count;
             var totalCoins = 0.0;
             for (var i = 0; i < count; i++)
@@ -97,15 +108,15 @@ public class CoinTracker : MonoBehaviour
             }
             var finalIntervalPrice = Convert.ToDouble(jsonData[count - 1][1]);
             var coinData = trackedCoins[coin];
-            coinData.InvestmentValue = (10 * count) / totalCoins;
+            coinData.InvestmentValue = (10.0 * count) / totalCoins;
             trackedCoins[coin] = coinData;
         }));
     }
 
-    void UpdateCurrentPrice(string coin)
+    Coroutine UpdateCurrentPrice(string coin)
     {
         var url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&ids=" + coin;
-        StartCoroutine(RESTFULInterface.Instance.GetRequest(url, (responseData) =>
+        return StartCoroutine(RESTFULInterface.Instance.GetRequest(url, (responseData) =>
         {
             if (responseData.Contains("Error"))
             {
@@ -119,7 +130,7 @@ public class CoinTracker : MonoBehaviour
             trackedCoins[coin] = coinData;
         }));
 
-        }
+    }
 
     public void StoreCoinToTrack(Text textComponent)
     {
@@ -128,9 +139,9 @@ public class CoinTracker : MonoBehaviour
 
     private void StoreCoinToTrack(string coin)
     {
-        localCoinsToTrack = JSON.Parse(PlayerPrefs.GetString(TRACKEDCOINSKEY, "[]"));
-        
-        foreach(JSONNode c in localCoinsToTrack.AsArray)
+        var coinsFile = File.ReadAllText(coinPath);
+        localCoinsToTrack = JSON.Parse(coinsFile);
+        foreach (JSONNode c in localCoinsToTrack.AsArray)
         {
             if (coin.Equals(c))
             {
@@ -155,7 +166,7 @@ public class CoinTracker : MonoBehaviour
         }
 
         localCoinsToTrack.Add(coin);
-        PlayerPrefs.SetString(TRACKEDCOINSKEY, localCoinsToTrack.ToString());
+        File.WriteAllText(coinPath, localCoinsToTrack.ToString());
         Debug.Log(localCoinsToTrack.ToString());
         CreateTrackForCoin(coin);
     }
@@ -182,8 +193,8 @@ public class CoinTracker : MonoBehaviour
         var coinTrack = Instantiate(coinTrackPrefab, trackedCoinsContainer.content);
         coinTrack.name = coin;
         coinTracks.Add(coin, coinTrack);
-        UpdateEuroCostAverage(coin, 30, "daily");
-        UpdateInvestmentAverage(coin, 30, "daily");
+        UpdateEuroCostAverage(coin, retroSpect, "daily");
+        UpdateInvestmentAverage(coin, retroSpect, "daily");
         UpdateCurrentPrice(coin);
         coinTrack.UpdateView(trackedCoins[coin]);
 
@@ -191,39 +202,29 @@ public class CoinTracker : MonoBehaviour
 
     IEnumerator RefreshTrackedCoins()
     {
-        while (true)
+        retrospectDropdown.interactable = refreshButton.interactable = false;
+        
+        var clonedCoins = new Dictionary<string, Coin>(trackedCoins);
+        foreach (var coinKey in clonedCoins.Keys)
         {
-            var clonedCoins = new Dictionary<string, Coin>(trackedCoins);
-            foreach (var coinKey in clonedCoins.Keys)
-            {
-                var coin = clonedCoins[coinKey];
-                UpdateEuroCostAverage(coin.ID, 30, "daily");
-                yield return new WaitForSeconds(0.15f);
-
-                UpdateInvestmentAverage(coin.ID, 30, "daily");
-                yield return new WaitForSeconds(0.15f);
-
-                UpdateCurrentPrice(coin.ID);
-                yield return new WaitForSeconds(0.15f);
-
-
-                if (coinTracks.ContainsKey(coin.ID))
-                    coinTracks[coin.ID].UpdateView(coin);
-                else
-                    Debug.LogError("Coin key not tracked: " + coin.ID);
-                yield return new WaitForSeconds(0.1f * coinTracks.Count);
-            }
-
-            yield return null;
+            var coin = clonedCoins[coinKey];
+            yield return UpdateEuroCostAverage(coin.ID, retroSpect, "daily");
+            yield return UpdateInvestmentAverage(coin.ID, retroSpect, "daily");
+            yield return UpdateCurrentPrice(coin.ID);
+            if (coinTracks.ContainsKey(coin.ID))
+                coinTracks[coin.ID].UpdateView(trackedCoins[coin.ID]);
+            else
+                Debug.LogError("Coin key not tracked: " + coin.ID);
+            yield return new WaitForSeconds(1.1f);
         }
+        retrospectDropdown.interactable = refreshButton.interactable = true;
     }
 
-    private void RetrievedBackground(Texture2D texture)
+    public void OnRetrospectChange(int value)
     {
-        if (texture == null)
-            return;
-
-        background.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
+        var selectedOption = retrospectDropdown.options[value];
+        retroSpect = int.Parse(selectedOption.text.Substring(0,selectedOption.text.Length - 4));
+        Refresh();
     }
 
 #if UNITY_EDITOR

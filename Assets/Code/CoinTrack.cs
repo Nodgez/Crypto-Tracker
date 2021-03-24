@@ -15,7 +15,7 @@ public class CoinTrack : MonoBehaviour
     [SerializeField]
     private Button tradeButton;
     [SerializeField]
-    private Image background;
+    private Image background, updateFlash;
 
     private Color textColor;
     private TradePanel tradesUI;
@@ -44,6 +44,8 @@ public class CoinTrack : MonoBehaviour
         average.text = string.Format("AVG: €{0:" + averageFormat + "}", coin.EuroAverage);
         investment.text = string.Format("ECA: €{0:" + averageFormat + "}", coin.InvestmentValue);
         currentPrice.text = string.Format("Current: €{0}", coin.CurrentPrice);
+
+        StartCoroutine(FlashTrack());
     }
 
     private void ApplyIcon(Texture2D texture)
@@ -77,6 +79,16 @@ public class CoinTrack : MonoBehaviour
     private float GetLuminence(Color color)
     {
         return 0.2126f * color.r + 0.7152f * color.g + 0.0722f * color.b;
+    }
 
+    private IEnumerator FlashTrack()
+    {
+        updateFlash.color = Color.white;
+        var a = 1f;
+        while (updateFlash.color.a > 0)
+        {
+            updateFlash.color = new Color(1, 1, 1, a -= Time.deltaTime);
+            yield return null;
+        }
     }
 }
