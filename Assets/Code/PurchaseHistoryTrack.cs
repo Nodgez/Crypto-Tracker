@@ -22,7 +22,7 @@ public class PurchaseHistoryTrack : MonoBehaviour
     {
         dateOfPurchase.text = "Date: " + trade.Date;
         purchasePrice.text = "Cost: €" + trade.PricePaid.ToString();
-        coinPrice.text = "Worth: €" + trade.CoinPrice.ToString();
+        coinPrice.text = "Worth: €" + trade.CoinPrice.ToString(trade.CoinPrice < 1.0 ? "N5" : "N2");
         coinQuantity.text = "Owned: " + trade.coinQuantity.ToString();
     }
 }

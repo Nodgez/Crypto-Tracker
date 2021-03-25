@@ -14,7 +14,8 @@ public class CoinTracker : MonoBehaviour
     private Dropdown retrospectDropdown;
     [SerializeField]
     private Button refreshButton;
-
+    [SerializeField]
+    private CanvasGroup canvasGroup;
     [SerializeField]
     private CoinTrack coinTrackPrefab;
     [SerializeField]
@@ -57,6 +58,11 @@ public class CoinTracker : MonoBehaviour
     public void Refresh()
     {
         StartCoroutine(RefreshTrackedCoins());
+    }
+
+    public void Refresh(string coinId)
+    {
+        StartCoroutine(RefreshSingleTrack(coinId));
     }
 
     Coroutine UpdateEuroCostAverage(string coin, int days, string frequency)
@@ -202,8 +208,7 @@ public class CoinTracker : MonoBehaviour
 
     IEnumerator RefreshTrackedCoins()
     {
-        retrospectDropdown.interactable = refreshButton.interactable = false;
-        
+        SetInteractable(false);        
         var clonedCoins = new Dictionary<string, Coin>(trackedCoins);
         foreach (var coinKey in clonedCoins.Keys)
         {
@@ -217,7 +222,20 @@ public class CoinTracker : MonoBehaviour
                 Debug.LogError("Coin key not tracked: " + coin.ID);
             yield return new WaitForSeconds(1.1f);
         }
-        retrospectDropdown.interactable = refreshButton.interactable = true;
+        SetInteractable(true);
+    }
+
+    IEnumerator RefreshSingleTrack(string coinID)
+    {
+        SetInteractable(false);
+
+        var coin = trackedCoins[coinID];
+        yield return UpdateEuroCostAverage(coin.ID, retroSpect, "daily");
+        yield return UpdateInvestmentAverage(coin.ID, retroSpect, "daily");
+        yield return UpdateCurrentPrice(coin.ID);
+        if (coinTracks.ContainsKey(coin.ID))
+            coinTracks[coin.ID].UpdateView(trackedCoins[coin.ID]);
+        SetInteractable(true);
     }
 
     public void OnRetrospectChange(int value)
@@ -234,7 +252,10 @@ public class CoinTracker : MonoBehaviour
         PlayerPrefs.DeleteAll();
     }
 #endif
-
+    private void SetInteractable(bool isInteractable)
+    {
+        canvasGroup.interactable = refreshButton.interactable = retrospectDropdown.interactable = isInteractable;
+    }
 }
 
 public struct Coin

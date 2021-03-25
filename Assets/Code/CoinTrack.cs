@@ -13,21 +13,30 @@ public class CoinTrack : MonoBehaviour
     [SerializeField]
     private Text coinId, average, investment, currentPrice;
     [SerializeField]
-    private Button tradeButton;
+    private Button tradeButton, refreshButton;
     [SerializeField]
     private Image background, updateFlash;
 
     private Color textColor;
     private TradePanel tradesUI;
+    private CoinTracker trackerUI;
 
     private void Start()
     {
         tradeButton.onClick.AddListener(() =>
         {
             if (tradesUI == null)
-                tradesUI = GameObject.FindGameObjectWithTag("Trades").GetComponent<TradePanel>();
+                tradesUI = FindObjectOfType<TradePanel>();
 
             tradesUI.OpenTradesForCoin(name);
+        });
+
+        refreshButton.onClick.AddListener(() =>
+        {
+            if (trackerUI == null)
+                trackerUI = FindObjectOfType<CoinTracker>();
+
+            trackerUI.Refresh(name);
         });
     }
 

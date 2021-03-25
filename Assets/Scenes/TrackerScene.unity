@@ -1503,8 +1503,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2}
-  m_SizeDelta: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 200}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &596975052
 MonoBehaviour:
@@ -2654,6 +2654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 843945301}
   - component: {fileID: 843945302}
+  - component: {fileID: 843945303}
   m_Layer: 5
   m_Name: CoinList
   m_TagString: Untagged
@@ -2711,6 +2712,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!225 &843945303
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843945300}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &849028173
 GameObject:
   m_ObjectHideFlags: 0
@@ -3260,6 +3273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   retrospectDropdown: {fileID: 1779749436}
   refreshButton: {fileID: 1328895660}
+  canvasGroup: {fileID: 843945303}
   coinTrackPrefab: {fileID: 2106971161106092441, guid: b3a41a99c19d5aa4490767120d591307, type: 3}
   trackedCoinsContainer: {fileID: 843945302}
 --- !u!4 &1130674311
