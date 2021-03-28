@@ -112,7 +112,7 @@ public class TradePanel : MonoBehaviour
 
             totalSpend += trade.PricePaid;
             totalQuantity += trade.coinQuantity;
-            averageBuyInCost += trade.CoinPrice;
+            averageBuyInCost += trade.coinQuantity < 0 ? 0 : trade.CoinPrice;
 
             var purchaseTrack = Instantiate(purchaseHistoryPrefab, purchaseHistoryContainer.content);
             purchaseTrack.AddDelete(() =>
