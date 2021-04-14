@@ -20,9 +20,9 @@ public class CoinTracker : MonoBehaviour
     private CoinTrack coinTrackPrefab;
     [SerializeField]
     private ScrollRect trackedCoinsContainer;
-    
+
+    static public JSONNode localCoinsToTrack = JSON.Parse("{}");
     private JSONNode allCoinGeckoCoins;
-    private JSONNode localCoinsToTrack = JSON.Parse("{}");
 
     private Dictionary<string, Coin> trackedCoins = new Dictionary<string, Coin>();
     private Dictionary<string, CoinTrack> coinTracks = new Dictionary<string, CoinTrack>();
@@ -135,7 +135,10 @@ public class CoinTracker : MonoBehaviour
             coinData.CurrentPrice = Convert.ToDouble(jsonData);
             trackedCoins[coin] = coinData;
         }));
+    }
 
+    private void UpdateTotalInvesment(string coin)
+    {
     }
 
     public void StoreCoinToTrack(Text textComponent)
@@ -173,7 +176,6 @@ public class CoinTracker : MonoBehaviour
 
         localCoinsToTrack.Add(coin);
         File.WriteAllText(coinPath, localCoinsToTrack.ToString());
-        Debug.Log(localCoinsToTrack.ToString());
         CreateTrackForCoin(coin);
     }
 
@@ -197,11 +199,12 @@ public class CoinTracker : MonoBehaviour
         }
 
         var coinTrack = Instantiate(coinTrackPrefab, trackedCoinsContainer.content);
-        coinTrack.name = coin;
+        coinTrack.name = trackedCoins[coin].symbol;
         coinTracks.Add(coin, coinTrack);
         UpdateEuroCostAverage(coin, retroSpect, "daily");
         UpdateInvestmentAverage(coin, retroSpect, "daily");
         UpdateCurrentPrice(coin);
+        
         coinTrack.UpdateView(trackedCoins[coin]);
 
     }
@@ -266,10 +269,12 @@ public struct Coin
     public double EuroAverage;
     public double InvestmentValue;
     public double CurrentPrice;
+    public double TotalInvestment;
 }
 
 public struct Trade
 {
+    public string Symbol;
     public string Date;
     public double PricePaid;
     public double coinQuantity;
@@ -283,5 +288,11 @@ public struct Trade
         tradeJSON.Add("coinQuantity", coinQuantity.ToString());
         tradeJSON.Add("coinPrice", CoinPrice.ToString());
         return tradeJSON;
+    }
+
+    public override string ToString()
+    {
+        var str = string.Format("id: {0},date: {1}, pricePaid: {2},quantity: {3}, price: {4} ", Symbol, Date, PricePaid.ToString(), coinQuantity.ToString(), CoinPrice.ToString());
+        return str;
     }
 }

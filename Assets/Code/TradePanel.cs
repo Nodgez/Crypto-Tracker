@@ -7,10 +7,8 @@ using System.IO;
 
 public class TradePanel : MonoBehaviour
 {
-    private const string PURCHASEHISTORY = "purchaseHistory";
-
     [SerializeField]
-    private Text totalSpendText, totalQuantityText, averageBuyInText, coinName;
+    private Text totalSpendText, totalQuantityText, averageBuyInText, coinName, totalInvesement;
     [SerializeField]
     private InputField dateInput, pricePaidInput, quantityInput;
     [SerializeField]
@@ -19,7 +17,7 @@ public class TradePanel : MonoBehaviour
     private ScrollRect purchaseHistoryContainer;
     [SerializeField]
     private CanvasGroup tradesUI, addTradePopup;
-    private string openCoinID;
+    private string openCoinSymbol;
     private double totalSpend;
     private double totalQuantity;
     private double averageBuyInCost;
@@ -43,25 +41,27 @@ public class TradePanel : MonoBehaviour
             coinQuantity = Convert.ToDouble(quantityInput.text),
         };
 
-        AddPurchase(openCoinID, trade);
+        AddPurchase(openCoinSymbol, trade);
         dateInput.text = string.Empty;
         pricePaidInput.text = string.Empty;
         quantityInput.text = string.Empty;
         addTradePopup.Off();
     }
 
-    public void OpenTradesForCoin(string coin)
+    public void OpenTradesForCoin(string symbol)
     {
-        openCoinID = coin;
-        coinName.text = coin;
-        DisplayAllPurchases(openCoinID);
+        openCoinSymbol = symbol;
+        coinName.text = symbol;
+        DisplayAllPurchases(openCoinSymbol);
         tradesUI.On();
+        DisplayTotalInvestment();
     }
 
     public void CloseTradesForCoins()
     {
-        openCoinID = string.Empty;
+        openCoinSymbol = string.Empty;
         tradesUI.Off();
+        DisplayTotalInvestment();
     }
 
     public void AddPurchase(string coin, Trade newTrade)
@@ -90,44 +90,45 @@ public class TradePanel : MonoBehaviour
 
     }
 
-    public void DisplayAllPurchases(string coin)
+    public void DisplayAllPurchases(string symbol)
     {
         totalSpend = totalQuantity = averageBuyInCost = 0;
         purchaseHistoryContainer.content.ClearChildren();
-        var tradesFile = "{}";
-        if (File.Exists(tradesPath))
-            tradesFile = File.ReadAllText(tradesPath);
-        var purchaseObject = JSON.Parse(tradesFile);
-        var history = purchaseObject[coin].AsArray;
+        var history = GlobalData.Instance.GetCoinTradeHistory(symbol);
+        var historyCount = history.Count;
 
-        foreach (JSONNode n in history)
+        foreach (var trade in history)
         {
-            var trade = new Trade()
-            {
-                Date = n["date"].Value,
-                PricePaid = Convert.ToDouble(n["pricePaid"].Value),
-                CoinPrice = Convert.ToDouble(n["coinPrice"].Value),
-                coinQuantity = Convert.ToDouble(n["coinQuantity"].Value)
-            };
-
             totalSpend += trade.PricePaid;
             totalQuantity += trade.coinQuantity;
-            averageBuyInCost += trade.coinQuantity < 0 ? 0 : trade.CoinPrice;
+            if (trade.coinQuantity < 0)
+                historyCount--;
+            else
+                averageBuyInCost += trade.CoinPrice;
+
 
             var purchaseTrack = Instantiate(purchaseHistoryPrefab, purchaseHistoryContainer.content);
             purchaseTrack.AddDelete(() =>
             {
-                RemovePurchase(openCoinID, trade.Date);
+                RemovePurchase(openCoinSymbol, trade.Date);
             });
             purchaseTrack.UpdateView(trade);
         }
 
-        averageBuyInCost = averageBuyInCost / history.Count;
+        averageBuyInCost = averageBuyInCost / historyCount;
 
         totalQuantityText.text = "Quantity: " + totalQuantity.ToString();
-        totalSpendText.text =  "Spend: €" + totalSpend.ToString();
+        totalSpendText.text = "Spend: €" + totalSpend.ToString();
         averageBuyInText.text = "AVG Cost: €" + averageBuyInCost.ToString("N2");
+    }
 
+    public JSONArray GetCoinPurchaseHistory(string coin)
+    {
+        var tradesFile = "{}";
+        if (File.Exists(tradesPath))
+            tradesFile = File.ReadAllText(tradesPath);
+        var purchaseObject = JSON.Parse(tradesFile);
+        return purchaseObject[coin].AsArray;
     }
 
     public void RemovePurchase(string coin, string date)
@@ -153,11 +154,10 @@ public class TradePanel : MonoBehaviour
         DisplayAllPurchases(coin);
     }
 
-#if UNITY_EDITOR
-    [MenuItem("Data Helper/Clear Purchase History")]
-    static void ClearPurchaseHistory()
+    private void DisplayTotalInvestment()
     {
-        PlayerPrefs.DeleteKey(PURCHASEHISTORY);
+        totalInvesement.text = "€" + GlobalData.Instance.TotalSpend.ToString("N2");
+
+        //totalInvesement.text = "TI: " + total.ToString("N2");
     }
-#endif
 }

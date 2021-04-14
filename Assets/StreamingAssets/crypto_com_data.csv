@@ -1,0 +1,43 @@
+Timestamp (UTC),Transaction Description,Currency,Amount,To Currency,To Amount,Native Currency,Native Amount,Native Amount (in USD),Transaction Kind
+2021-04-12 15:53:35,Card Cashback,CRO,17.37017404,,,EUR,3.01,3.5958760621,referral_card_cashback
+2021-04-11 00:15:18,Crypto Earn,ADA,0.15001096,,,EUR,0.15,0.1791964815,crypto_earn_interest_paid
+2021-04-09 00:23:13,Crypto Earn,ADA,0.10402192,,,EUR,0.1,0.119464321,crypto_earn_interest_paid
+2021-04-08 00:25:45,Crypto Earn,BTC,0.00000446,,,EUR,0.21,0.2508750741,crypto_earn_interest_paid
+2021-04-07 10:48:35,EUR -> ENJ,EUR,-100.06,ENJ,54.7,EUR,100.06,119.5359995926,viban_purchase
+2021-04-04 21:33:53,Crypto Earn Deposit,ADA,-391.1,,,EUR,-386.78,-462.0641007638,crypto_earn_program_created
+2021-04-04 21:15:58,EUR -> ADA,EUR,-150.19,ADA,147.4,EUR,150.19,179.4234637099,viban_purchase
+2021-04-02 08:10:08,Supercharger Deposit (via app),CRO,-125.72,,,EUR,-22.18,-26.4971863978,supercharger_deposit
+2021-04-02 06:19:38,Convert Dust,CRO,121.825612009668628784,,,EUR,21.53,25.7206683113,dust_conversion_credited
+2021-04-02 06:19:38,Convert Dust,XLM,-58.4,,,EUR,-21.8,-26.043221978,dust_conversion_debited
+2021-04-02 00:31:45,Crypto Earn,ADA,0.10402192,,,EUR,0.1,0.119464321,crypto_earn_interest_paid
+2021-04-01 00:54:30,Crypto Earn,BTC,0.00000446,,,EUR,0.22,0.2628215062,crypto_earn_interest_paid
+2021-03-31 08:35:28,EUR -> GLM,EUR,-97.3,GLM,186.0,EUR,97.3,116.238784333,viban_purchase
+2021-03-31 08:28:38,EUR -> ADA,EUR,-204.19,ADA,200.0,EUR,204.19,243.9341970499,viban_purchase
+2021-03-30 14:45:34,Card Cashback,CRO,2.33263655,,,EUR,0.43,0.5136965803,referral_card_cashback
+2021-03-30 14:06:06,Card Cashback,CRO,1.46496591,,,EUR,0.27,0.3225536667,referral_card_cashback
+2021-03-30 11:59:38,Card Cashback,CRO,0.04501164,,,EUR,0.01,0.0119464321,referral_card_cashback
+2021-03-30 11:58:36,Card Cashback,CRO,0.04497083,,,EUR,0.01,0.0119464321,referral_card_cashback
+2021-03-30 05:48:45,EUR -> HOT,EUR,-98.26,HOT,8000.0,EUR,98.26,117.3856418146,viban_purchase
+2021-03-29 16:16:36,Supercharger Deposit (via app),CRO,-850.1,,,EUR,-150.89,-180.2597139569,supercharger_deposit
+2021-03-26 00:04:44,Crypto Earn,ADA,0.10402192,,,EUR,0.1,0.119464321,crypto_earn_interest_paid
+2021-03-25 20:35:05,EUR -> CRO,EUR,-58.89,CRO,342.74,EUR,58.89,70.3525386369,viban_purchase
+2021-03-25 20:33:46,EUR -> ETH,EUR,-145.67,ETH,0.105,EUR,145.67,174.0236764007,viban_purchase
+2021-03-25 06:05:55,Crypto Earn Deposit,BTC,-0.00517,,,EUR,-228.72,-273.2387949912,crypto_earn_program_created
+2021-03-25 06:04:53,XLM -> BTC,XLM,-58.5,BTC,0.0004,EUR,17.75,21.2049169775,crypto_exchange
+2021-03-24 22:42:41,EUR -> CRO,EUR,-89.32,CRO,500.0,EUR,89.32,106.7055315172,viban_purchase
+2021-03-24 22:39:58,EUR -> GLM,EUR,-191.1,GLM,475.0,EUR,191.1,228.296317431,viban_purchase
+2021-03-24 22:00:11,EUR -> BTC,EUR,-115.09,BTC,0.0025,EUR,115.09,137.4914870389,viban_purchase
+2021-03-22 17:54:26,Supercharger Deposit (via app),CRO,-542.26,,,EUR,-100.15,-119.6435174815,supercharger_deposit
+2021-03-19 01:10:00,Crypto Earn,ADA,0.10402192,,,EUR,0.11,0.1314107531,crypto_earn_interest_paid
+2021-03-15 22:14:55,EUR -> ADA,EUR,-38.42,ADA,43.4,EUR,38.42,45.8981921282,viban_purchase
+2021-03-15 22:14:17,RVN -> EUR,RVN,-200.0,EUR,38.41,EUR,38.41,45.8862456961,crypto_viban_exchange
+2021-03-12 11:20:58,Crypto Earn Deposit,ADA,-271.2,,,EUR,-243.48,-290.8717287708,crypto_earn_program_created
+2021-03-12 11:19:26,EUR -> ADA,EUR,-149.92,ADA,161.2,EUR,149.92,179.1009100432,viban_purchase
+2021-03-01 07:38:30,CRO -> RVN,CRO,-232.870764,RVN,200.0,EUR,26.03,31.0965627563,crypto_exchange
+2021-02-27 15:32:27,Supercharger Deposit (via app),CRO,-100.0,,,EUR,-12.21,-14.5865935941,supercharger_deposit
+2021-02-24 19:15:29,EUR -> CRO,EUR,-57.35,CRO,432.5,EUR,57.35,68.5127880935,viban_purchase
+2021-02-24 19:14:44,EUR -> GLM,EUR,-46.08,GLM,150.0,EUR,46.08,55.0491591168,viban_purchase
+2021-02-24 19:00:49,EUR -> ADA,EUR,-96.58,ADA,110.0,EUR,96.58,115.3786412218,viban_purchase
+2021-02-19 14:23:27,EUR -> XLM,EUR,-49.96,XLM,116.9,EUR,49.96,59.6843747716,viban_purchase
+2021-02-19 14:10:22,EUR -> CRO,EUR,-49.99,CRO,450.0,EUR,49.99,59.7202140679,viban_purchase
+2021-02-19 14:08:40,EUR -> BTC,EUR,-100.04,BTC,0.00227,EUR,100.04,119.5121067284,viban_purchase
