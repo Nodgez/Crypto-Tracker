@@ -1,3 +1,5 @@
+using SimpleJSON;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -28,7 +30,8 @@ public class CoinTrack : MonoBehaviour
             if (tradesUI == null)
                 tradesUI = FindObjectOfType<TradePanel>();
 
-            tradesUI.OpenTradesForCoin(name);
+            var coin = GlobalData.Instance.GetCoin(name);
+            tradesUI.OpenTradesForCoin(coin.symbol);
         });
 
         refreshButton.onClick.AddListener(() =>
@@ -40,19 +43,15 @@ public class CoinTrack : MonoBehaviour
         });
     }
 
-    public void UpdateView(Coin coin)
+    public void UpdateView(Coin coin, int days)
     {
-        if (icon.sprite == null && !string.IsNullOrEmpty(coin.symbol))
-        {
-            StartCoroutine(RESTFULInterface.Instance.GetRequest(Path.Combine(Application.streamingAssetsPath, coin.symbol + ".png"), ApplyIcon));
-        }
+        ApplyIcon(coin.Icon);
         coinId.color = average.color = currentPrice.color = investment.color = textColor;
         coinId.text = coin.ID.ToUpper();
 
-        string averageFormat = coin.EuroAverage < 1 ? "N5" : "N2";
-        average.text = string.Format("AVG: €{0:" + averageFormat + "}", coin.EuroAverage);
-        investment.text = string.Format("ECA: €{0:" + averageFormat + "}", coin.InvestmentValue);
-        currentPrice.text = string.Format("Current: €{0}", coin.CurrentPrice);
+        RefreshAVG(coin.MarketHistory, days);
+        RefreshECA(coin.MarketHistory, days);
+        currentPrice.text = "€" + coin.CurrentPrice.ToString();
 
         StartCoroutine(FlashTrack());
     }
@@ -99,5 +98,36 @@ public class CoinTrack : MonoBehaviour
             updateFlash.color = new Color(1, 1, 1, a -= Time.deltaTime);
             yield return null;
         }
+    }
+
+    public void RefreshECA(JSONNode marketPrices, int days)
+    {
+        var startingPoint = marketPrices.Count - days;
+        var totalCoins = 0.0;
+        for (var i = startingPoint; i < marketPrices.Count; i++)
+        {
+            var priceOnInterval = Convert.ToDouble(marketPrices[i][1]);
+            var tenEuroWorth = 10 / priceOnInterval;
+            totalCoins += tenEuroWorth;
+        }
+        var eca = (10.0 * days) / totalCoins;
+        string averageFormat = eca < 1 ? "N5" : "N2";
+        investment.text = string.Format("ECA: €{0:" + averageFormat + "}", eca);
+
+    }
+
+    public void RefreshAVG(JSONNode marketPrices, int days)
+    {
+        var sum = 0.0;
+        var startingPoint = marketPrices.Count - days;
+        for (var i = startingPoint; i < marketPrices.Count; i++)
+        {
+            var dp = marketPrices[i][1];
+            sum += Convert.ToDouble(dp);
+        }
+
+        var avg = sum / days;
+        string averageFormat = avg < 1 ? "N5" : "N2";
+        average.text = string.Format("AVG: €{0:" + averageFormat + "}", avg);
     }
 }

@@ -32,21 +32,21 @@ public class TradePanel : MonoBehaviour
         addTradePopup.On();
     }
 
-    public void GenerateTrade()
-    {
-        var trade = new Trade()
-        {
-            Date = dateInput.text,
-            PricePaid = Convert.ToDouble(pricePaidInput.text),
-            coinQuantity = Convert.ToDouble(quantityInput.text),
-        };
+    //public void GenerateTrade()
+    //{
+    //    var trade = new Trade()
+    //    {
+    //        Date = dateInput.text,
+    //        PricePaid = Convert.ToDouble(pricePaidInput.text),
+    //        coinQuantity = Convert.ToDouble(quantityInput.text),
+    //    };
 
-        AddPurchase(openCoinSymbol, trade);
-        dateInput.text = string.Empty;
-        pricePaidInput.text = string.Empty;
-        quantityInput.text = string.Empty;
-        addTradePopup.Off();
-    }
+    //    AddPurchase(openCoinSymbol, trade);
+    //    dateInput.text = string.Empty;
+    //    pricePaidInput.text = string.Empty;
+    //    quantityInput.text = string.Empty;
+    //    addTradePopup.Off();
+    //}
 
     public void OpenTradesForCoin(string symbol)
     {
@@ -62,32 +62,6 @@ public class TradePanel : MonoBehaviour
         openCoinSymbol = string.Empty;
         tradesUI.Off();
         DisplayTotalInvestment();
-    }
-
-    public void AddPurchase(string coin, Trade newTrade)
-    {
-        StartCoroutine(RESTFULInterface.Instance.GetRequest("https://api.coingecko.com/api/v3/coins/" + coin + "/history?date=" + newTrade.Date, (response) =>
-        {
-            if (response.Contains("Error"))
-            {
-                Debug.LogError(response);
-                return;
-            }
-            var currentPrice = JSON.Parse(response)["market_data"]["current_price"]["eur"];
-            newTrade.CoinPrice = Convert.ToDouble(currentPrice);
-
-            var purchaseObject = JSON.Parse(File.ReadAllText(tradesPath));
-            if (purchaseObject[coin] == null)
-                purchaseObject.Add(coin, JSON.Parse("[]"));
-
-            var tradeFormatted = newTrade.FormatToJSON();
-            purchaseObject[coin].AsArray.Add(tradeFormatted);
-
-            File.WriteAllText(tradesPath, purchaseObject.ToString());
-
-            DisplayAllPurchases(coin);
-        }));
-
     }
 
     public void DisplayAllPurchases(string symbol)
@@ -108,10 +82,6 @@ public class TradePanel : MonoBehaviour
 
 
             var purchaseTrack = Instantiate(purchaseHistoryPrefab, purchaseHistoryContainer.content);
-            purchaseTrack.AddDelete(() =>
-            {
-                RemovePurchase(openCoinSymbol, trade.Date);
-            });
             purchaseTrack.UpdateView(trade);
         }
 
@@ -131,33 +101,8 @@ public class TradePanel : MonoBehaviour
         return purchaseObject[coin].AsArray;
     }
 
-    public void RemovePurchase(string coin, string date)
-    {
-        var tradesFile = File.ReadAllText(tradesPath);
-
-        var purchaseObject = JSON.Parse(tradesFile);
-        if (purchaseObject[coin] == null)
-            return;
-
-        int indexer = 0;
-        foreach (JSONNode node in purchaseObject[coin].AsArray)
-        {
-            if (node["date"].Value.Equals(date))
-            {
-                purchaseObject[coin].AsArray.Remove(indexer);
-                File.WriteAllText(tradesPath, purchaseObject.ToString());
-                break;
-            }
-            indexer++;
-        }
-
-        DisplayAllPurchases(coin);
-    }
-
     private void DisplayTotalInvestment()
     {
         totalInvesement.text = "€" + GlobalData.Instance.TotalSpend.ToString("N2");
-
-        //totalInvesement.text = "TI: " + total.ToString("N2");
     }
 }

@@ -22,31 +22,23 @@ public class CoinTracker : MonoBehaviour
     private ScrollRect trackedCoinsContainer;
 
     static public JSONNode localCoinsToTrack = JSON.Parse("{}");
-    private JSONNode allCoinGeckoCoins;
 
-    private Dictionary<string, Coin> trackedCoins = new Dictionary<string, Coin>();
     private Dictionary<string, CoinTrack> coinTracks = new Dictionary<string, CoinTrack>();
     private string coinPath;
     private int retroSpect = 30;
     // Start is called before the first frame update
     void Start()
     {
-        coinPath = Path.Combine(Application.persistentDataPath, "coins.json");
-        retrospectDropdown.onValueChanged.AddListener(OnRetrospectChange);
-
-        StartCoroutine(InitializeTracker());        
+        StartCoroutine(Initialize());
     }
 
-    IEnumerator InitializeTracker()
+    IEnumerator Initialize()
     {
-        yield return StartCoroutine(RESTFULInterface.Instance.GetRequest("https://api.coingecko.com/api/v3/coins/list", (response) =>
-        {
-            if (response.Contains("Error"))
-            {
-                return;
-            }
-            allCoinGeckoCoins = JSON.Parse(response);
-        }));
+        while (!GlobalData.Instance.Initialized)
+            yield return null;
+
+        coinPath = Path.Combine(Application.persistentDataPath, "coins.json");
+        retrospectDropdown.onValueChanged.AddListener(OnRetrospectChange);
 
         var coinsFile = File.ReadAllText(coinPath);
         localCoinsToTrack = JSON.Parse(coinsFile);
@@ -54,91 +46,15 @@ public class CoinTracker : MonoBehaviour
             CreateTrackForCoin(n);
         Refresh();
     }
-
     public void Refresh()
     {
-        StartCoroutine(RefreshTrackedCoins());
+        SetInteractable(false);
+        GlobalData.Instance.RefrehTrackedCoinData(RefreshComplete);
     }
 
     public void Refresh(string coinId)
     {
-        StartCoroutine(RefreshSingleTrack(coinId));
-    }
-
-    Coroutine UpdateEuroCostAverage(string coin, int days, string frequency)
-    {
-        var url = "https://api.coingecko.com/api/v3/coins/" + coin + "/market_chart?vs_currency=eur&days=" + days + "&interval=" + frequency;
-        return StartCoroutine(RESTFULInterface.Instance.GetRequest(url,(responseData) => {
-
-            if (responseData.Contains("Error"))
-            {
-                Debug.LogError(responseData);
-                return;
-            }
-
-            var jsonData = JSON.Parse(responseData)["prices"];
-            var count = jsonData.Count;
-            var sum = 0.0;
-            for (var i = 0; i < count; i++)
-            {
-                var dp = jsonData[i][1];
-                sum += Convert.ToDouble(dp);
-            }
-
-            var coinData = trackedCoins[coin];
-            coinData.EuroAverage = sum / count;
-            trackedCoins[coin] = coinData;
-        }));
-    }
-
-    Coroutine UpdateInvestmentAverage(string coin, int days, string frequency)
-    {
-        var url = "https://api.coingecko.com/api/v3/coins/" + coin + "/market_chart?vs_currency=eur&days=" + days + "&interval=" + frequency;
-        return StartCoroutine(RESTFULInterface.Instance.GetRequest(url, (responseData) => {
-
-            if (responseData.Contains("Error"))
-            {
-                Debug.LogError(responseData);
-                return;
-            }
-
-            var jsonData = JSON.Parse(responseData)["prices"];
-            Debug.Log(jsonData);
-            var count = jsonData.Count;
-            var totalCoins = 0.0;
-            for (var i = 0; i < count; i++)
-            {
-                var priceOnInterval = Convert.ToDouble(jsonData[i][1]);
-                var tenEuroWorth = 10 / priceOnInterval;
-                totalCoins += tenEuroWorth;
-            }
-            var finalIntervalPrice = Convert.ToDouble(jsonData[count - 1][1]);
-            var coinData = trackedCoins[coin];
-            coinData.InvestmentValue = (10.0 * count) / totalCoins;
-            trackedCoins[coin] = coinData;
-        }));
-    }
-
-    Coroutine UpdateCurrentPrice(string coin)
-    {
-        var url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&ids=" + coin;
-        return StartCoroutine(RESTFULInterface.Instance.GetRequest(url, (responseData) =>
-        {
-            if (responseData.Contains("Error"))
-            {
-                Debug.LogError(responseData);
-                return;
-            }
-
-            var jsonData = JSON.Parse(responseData)[0]["current_price"];
-            var coinData = trackedCoins[coin];
-            coinData.CurrentPrice = Convert.ToDouble(jsonData);
-            trackedCoins[coin] = coinData;
-        }));
-    }
-
-    private void UpdateTotalInvesment(string coin)
-    {
+        GlobalData.Instance.RefrehTrackedCoinData(coinId, RefreshComplete);
     }
 
     public void StoreCoinToTrack(Text textComponent)
@@ -159,15 +75,8 @@ public class CoinTracker : MonoBehaviour
             }
         }
 
-        var isValidCoin = false;
-        foreach (JSONNode n in allCoinGeckoCoins.AsArray)
-        {
-            if (coin == n["id"].Value)
-            {
-                isValidCoin = true;
-                break;
-            }
-        }
+        var isValidCoin = GlobalData.Instance.IsValidCoin(coin);
+
         if (!isValidCoin)
         {
             Debug.LogWarning(coin + " is not a valid coin");
@@ -179,65 +88,31 @@ public class CoinTracker : MonoBehaviour
         CreateTrackForCoin(coin);
     }
 
-    private void CreateTrackForCoin(string coin)
+    private void CreateTrackForCoin(string symbol)
     {
-        trackedCoins[coin] = new Coin()
-        {
-            ID = coin
-        };
-
-        foreach (JSONNode node in allCoinGeckoCoins.AsArray)
-        {
-            if (coin == node["id"].Value)
-            {
-                var c = trackedCoins[coin];
-                c.symbol = node["symbol"];
-                trackedCoins[coin] = c;
-
-                break;
-            }
-        }
-
         var coinTrack = Instantiate(coinTrackPrefab, trackedCoinsContainer.content);
-        coinTrack.name = trackedCoins[coin].symbol;
-        coinTracks.Add(coin, coinTrack);
-        UpdateEuroCostAverage(coin, retroSpect, "daily");
-        UpdateInvestmentAverage(coin, retroSpect, "daily");
-        UpdateCurrentPrice(coin);
-        
-        coinTrack.UpdateView(trackedCoins[coin]);
-
+        coinTrack.name = symbol;
+        coinTracks.Add(symbol, coinTrack);
     }
 
-    IEnumerator RefreshTrackedCoins()
+    private void RefreshComplete()
     {
-        SetInteractable(false);        
-        var clonedCoins = new Dictionary<string, Coin>(trackedCoins);
-        foreach (var coinKey in clonedCoins.Keys)
+        foreach (var key in coinTracks.Keys)
         {
-            var coin = clonedCoins[coinKey];
-            yield return UpdateEuroCostAverage(coin.ID, retroSpect, "daily");
-            yield return UpdateInvestmentAverage(coin.ID, retroSpect, "daily");
-            yield return UpdateCurrentPrice(coin.ID);
-            if (coinTracks.ContainsKey(coin.ID))
-                coinTracks[coin.ID].UpdateView(trackedCoins[coin.ID]);
-            else
-                Debug.LogError("Coin key not tracked: " + coin.ID);
-            yield return new WaitForSeconds(1.1f);
+            var track = coinTracks[key];
+            var coin = GlobalData.Instance.GetCoin(track.name);
+            track.UpdateView(coin, retroSpect);
         }
+
         SetInteractable(true);
     }
 
-    IEnumerator RefreshSingleTrack(string coinID)
+    private void RefreshComplete(string coinID)
     {
-        SetInteractable(false);
+        var track = coinTracks[coinID];
+        var coin = GlobalData.Instance.GetCoin(track.name);
+        track.UpdateView(coin, retroSpect);
 
-        var coin = trackedCoins[coinID];
-        yield return UpdateEuroCostAverage(coin.ID, retroSpect, "daily");
-        yield return UpdateInvestmentAverage(coin.ID, retroSpect, "daily");
-        yield return UpdateCurrentPrice(coin.ID);
-        if (coinTracks.ContainsKey(coin.ID))
-            coinTracks[coin.ID].UpdateView(trackedCoins[coin.ID]);
         SetInteractable(true);
     }
 
@@ -258,41 +133,5 @@ public class CoinTracker : MonoBehaviour
     private void SetInteractable(bool isInteractable)
     {
         canvasGroup.interactable = refreshButton.interactable = retrospectDropdown.interactable = isInteractable;
-    }
-}
-
-public struct Coin
-{
-    public string ID;
-    public string symbol;
-    public string Name;
-    public double EuroAverage;
-    public double InvestmentValue;
-    public double CurrentPrice;
-    public double TotalInvestment;
-}
-
-public struct Trade
-{
-    public string Symbol;
-    public string Date;
-    public double PricePaid;
-    public double coinQuantity;
-    public double CoinPrice;
-
-    public JSONNode FormatToJSON()
-    {
-        var tradeJSON = JSON.Parse("{}");
-        tradeJSON.Add("date", Date);
-        tradeJSON.Add("pricePaid", PricePaid.ToString());
-        tradeJSON.Add("coinQuantity", coinQuantity.ToString());
-        tradeJSON.Add("coinPrice", CoinPrice.ToString());
-        return tradeJSON;
-    }
-
-    public override string ToString()
-    {
-        var str = string.Format("id: {0},date: {1}, pricePaid: {2},quantity: {3}, price: {4} ", Symbol, Date, PricePaid.ToString(), coinQuantity.ToString(), CoinPrice.ToString());
-        return str;
     }
 }
