@@ -20,6 +20,10 @@ public class CoinTracker : MonoBehaviour
     private CoinTrack coinTrackPrefab;
     [SerializeField]
     private ScrollRect trackedCoinsContainer;
+    [SerializeField]
+    private Text totalInvesement, percentageDifference;
+    [SerializeField]
+    private Image refreshingIcon;
 
     static public JSONNode localCoinsToTrack = JSON.Parse("{}");
 
@@ -39,6 +43,7 @@ public class CoinTracker : MonoBehaviour
 
         coinPath = Path.Combine(Application.persistentDataPath, "coins.json");
         retrospectDropdown.onValueChanged.AddListener(OnRetrospectChange);
+        refreshingIcon.gameObject.RotateAdd(Vector3.forward * -360, 1, 0, EaseType.linear, LoopType.loop);
 
         var coinsFile = File.ReadAllText(coinPath);
         localCoinsToTrack = JSON.Parse(coinsFile);
@@ -50,11 +55,14 @@ public class CoinTracker : MonoBehaviour
     {
         SetInteractable(false);
         GlobalData.Instance.RefrehTrackedCoinData(RefreshComplete);
+        refreshingIcon.enabled = true;
     }
 
     public void Refresh(string coinId)
     {
+        SetInteractable(false);
         GlobalData.Instance.RefrehTrackedCoinData(coinId, RefreshComplete);
+        refreshingIcon.enabled = true;
     }
 
     public void StoreCoinToTrack(Text textComponent)
@@ -104,16 +112,19 @@ public class CoinTracker : MonoBehaviour
             track.UpdateView(coin, retroSpect);
         }
 
+        totalInvesement.text = "€" + GlobalData.Instance.TotalSpend.ToString("N2");
+        percentageDifference.text = GlobalData.Instance.GetPercentageDifference().ToString("N2");
         SetInteractable(true);
+        refreshingIcon.enabled = false;
     }
 
     private void RefreshComplete(string coinID)
     {
         var track = coinTracks[coinID];
         var coin = GlobalData.Instance.GetCoin(track.name);
-        track.UpdateView(coin, retroSpect);
-
+        track.UpdateView(coin, retroSpect);       
         SetInteractable(true);
+        refreshingIcon.enabled = false;
     }
 
     public void OnRetrospectChange(int value)

@@ -31,7 +31,7 @@ public class CoinTrack : MonoBehaviour
                 tradesUI = FindObjectOfType<TradePanel>();
 
             var coin = GlobalData.Instance.GetCoin(name);
-            tradesUI.OpenTradesForCoin(coin.symbol);
+            tradesUI.OpenTradesForCoin(coin);
         });
 
         refreshButton.onClick.AddListener(() =>

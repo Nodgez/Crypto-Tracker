@@ -4,20 +4,18 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using System.Collections.Generic;
 
 public class TradePanel : MonoBehaviour
 {
     [SerializeField]
-    private Text totalSpendText, totalQuantityText, averageBuyInText, coinName, totalInvesement;
-    [SerializeField]
-    private InputField dateInput, pricePaidInput, quantityInput;
+    private Text totalSpendText, totalQuantityText, averageBuyInText, coinName, currentValueText, percentageDiffText;
     [SerializeField]
     private PurchaseHistoryTrack purchaseHistoryPrefab;
     [SerializeField]
     private ScrollRect purchaseHistoryContainer;
     [SerializeField]
-    private CanvasGroup tradesUI, addTradePopup;
-    private string openCoinSymbol;
+    private CanvasGroup tradesUI;
     private double totalSpend;
     private double totalQuantity;
     private double averageBuyInCost;
@@ -27,66 +25,42 @@ public class TradePanel : MonoBehaviour
     {
         tradesPath = Path.Combine(Application.persistentDataPath, "trades.json");
     }
-    public void OpenAddTradePopup()
+
+    public void OpenTradesForCoin(Coin coin)
     {
-        addTradePopup.On();
-    }
-
-    //public void GenerateTrade()
-    //{
-    //    var trade = new Trade()
-    //    {
-    //        Date = dateInput.text,
-    //        PricePaid = Convert.ToDouble(pricePaidInput.text),
-    //        coinQuantity = Convert.ToDouble(quantityInput.text),
-    //    };
-
-    //    AddPurchase(openCoinSymbol, trade);
-    //    dateInput.text = string.Empty;
-    //    pricePaidInput.text = string.Empty;
-    //    quantityInput.text = string.Empty;
-    //    addTradePopup.Off();
-    //}
-
-    public void OpenTradesForCoin(string symbol)
-    {
-        openCoinSymbol = symbol;
-        coinName.text = symbol;
-        DisplayAllPurchases(openCoinSymbol);
+        coinName.text = coin.symbol;
+        DisplayAllPurchases(coin);
         tradesUI.On();
-        DisplayTotalInvestment();
     }
 
     public void CloseTradesForCoins()
     {
-        openCoinSymbol = string.Empty;
         tradesUI.Off();
-        DisplayTotalInvestment();
     }
 
-    public void DisplayAllPurchases(string symbol)
+    public void DisplayAllPurchases(Coin coin)
     {
         totalSpend = totalQuantity = averageBuyInCost = 0;
         purchaseHistoryContainer.content.ClearChildren();
-        var history = GlobalData.Instance.GetCoinTradeHistory(symbol);
+        var history = GlobalData.Instance.GetCoinTradeHistory(coin.symbol);
         var historyCount = history.Count;
 
         foreach (var trade in history)
         {
             totalSpend += trade.PricePaid;
-            totalQuantity += trade.coinQuantity;
-            if (trade.coinQuantity < 0)
-                historyCount--;
-            else
-                averageBuyInCost += trade.CoinPrice;
-
 
             var purchaseTrack = Instantiate(purchaseHistoryPrefab, purchaseHistoryContainer.content);
             purchaseTrack.UpdateView(trade);
         }
 
-        averageBuyInCost = averageBuyInCost / historyCount;
+        totalQuantity = GlobalData.Instance.GetCurrencyTotal(coin.symbol);
+        averageBuyInCost = totalSpend / totalQuantity;
 
+        var currentValue = coin.CurrentPrice * totalQuantity;
+        var percentageDifference = (currentValue / totalSpend) * 100;
+        var percentageColor = percentageDifference > 100 ? "<color=green>" : "<color=red>";
+        currentValueText.text = "Current Value: €" + currentValue.ToString("N2");
+        percentageDiffText.text = "Diff: "+ percentageColor + percentageDifference.ToString("N2") + "%</color>";
         totalQuantityText.text = "Quantity: " + totalQuantity.ToString();
         totalSpendText.text = "Spend: €" + totalSpend.ToString();
         averageBuyInText.text = "AVG Cost: €" + averageBuyInCost.ToString("N2");
@@ -99,10 +73,5 @@ public class TradePanel : MonoBehaviour
             tradesFile = File.ReadAllText(tradesPath);
         var purchaseObject = JSON.Parse(tradesFile);
         return purchaseObject[coin].AsArray;
-    }
-
-    private void DisplayTotalInvestment()
-    {
-        totalInvesement.text = "€" + GlobalData.Instance.TotalSpend.ToString("N2");
     }
 }

@@ -5,12 +5,33 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+
 /// <summary>
 /// the purpose of this class is to read data from the Coin Gecko api
 /// and to read and store data on the local machine
 /// </summary>
 public class GlobalData : MonoBehaviour
 {
+    private enum TransactionKind
+    {
+        crypto_withdrawal,
+        viban_purchase, 
+        referral_card_cashback,
+        card_top_up,
+        dust_conversion_credited,
+        dust_conversion_debited,
+        crypto_exchange,
+        card_cashback_reverted,
+        crypto_earn_interest_paid,
+        crypto_earn_program_created,
+        crypto_earn_program_withdrawn,
+        reimbursement,
+        crypto_viban_exchange,
+        supercharger_deposit,
+        supercharger_withdrawal,
+        exchange_to_crypto_transfer,
+        lockup_lock
+    }
     public bool Initialized { get; private set; }
 
     static public JSONNode localCoinsToTrack = JSON.Parse("{}");
@@ -20,18 +41,26 @@ public class GlobalData : MonoBehaviour
     private Dictionary<string, List<Trade>> tradeMap = new Dictionary<string, List<Trade>>();
     private Dictionary<string, Coin> trackedCoins = new Dictionary<string, Coin>();
 
+    private Dictionary<string, double> CurrencyTotals = new Dictionary<string, double>();
+
     static private GlobalData s_instance;
     static public GlobalData Instance
     {
         get { return s_instance; }
     }
-    public double TotalSpend { get; private set; }
+    public double TotalSpend
+    {
+        get
+        {
+            return CurrencyTotals["EUR"];
+        }
+    }
     void Awake()
     {
         s_instance = this;
         Initialized = false;
         coinPath = Path.Combine(Application.persistentDataPath, "coins.json");
-        var coinsFile = File.ReadAllText(coinPath);
+        var coinsFile = System.IO.File.ReadAllText(coinPath);
         localCoinsToTrack = JSON.Parse(coinsFile);
 
         LoadSpreadSheet();
@@ -98,62 +127,101 @@ public class GlobalData : MonoBehaviour
             var splitData = dataString.Split(',');
 
             var transactionType = splitData[1];
+            var transactionKind = Enum.Parse(typeof(TransactionKind), splitData[9]);
+            //Debug.Log("Tranaction kind of this line: " + transactionKind);
 
-            if (transactionType.Contains("Earn"))
+            switch (transactionKind)
             {
-
-            }
-            else if (transactionType.Contains("->"))
-            {
-                var conversions = transactionType.Split(' ');
-                var currency1 = conversions[0];
-                var currency2 = conversions[2];
-                var euroValuation = Convert.ToDouble(splitData[7]);
-                var coinQuantity = Convert.ToDouble(splitData[5]);
-                var trade = new Trade()
-                {
-                    Symbol = currency2,
-                    Date = splitData[0],
-                    PricePaid = euroValuation,
-                    CoinPrice = euroValuation / coinQuantity,
-                    coinQuantity = coinQuantity
-                };
-                TotalSpend += currency1 == "EUR" ? euroValuation :  currency2 == "EUR" ? -euroValuation : 0;
-
-                if (!tradeMap.ContainsKey(trade.Symbol))
-                    tradeMap.Add(trade.Symbol, new List<Trade>());
-
-                tradeMap[trade.Symbol].Add(trade);
-                Debug.Log(trade.ToString());
-            }
-            else if (transactionType.Contains("Card"))
-            {
-
-            }
-            else if (transactionType.Contains("Supercharger"))
-            {
-
-            }
-            else if (transactionType.Contains("Dust"))
-            {
-                var symbol = splitData[2];
-                var euroValuation = Convert.ToDouble(splitData[7]);
-                var coinQuantity = Convert.ToDouble(splitData[3]);
-                var trade = new Trade()
-                {
-                    Symbol = symbol,
-                    Date = splitData[0],
-                    PricePaid = euroValuation,
-                    CoinPrice = euroValuation / coinQuantity,
-                    coinQuantity = coinQuantity
-                };
-
-                if (!tradeMap.ContainsKey(trade.Symbol))
-                    tradeMap.Add(trade.Symbol, new List<Trade>());
-
-                tradeMap[trade.Symbol].Add(trade);
+                case TransactionKind.viban_purchase:
+                    HandleVibanPurchase(splitData);
+                    break;
+                case TransactionKind.referral_card_cashback:
+                case TransactionKind.reimbursement:
+                case TransactionKind.crypto_earn_interest_paid:
+                case TransactionKind.exchange_to_crypto_transfer:
+                    HandlePassiveSources(splitData);
+                    break;
+                
             }
         }
+    }
+
+    private void HandlePassiveSources(string[] incomeData)
+    {
+        var fromCurrency = incomeData[2];
+        var fromAmount = double.Parse(incomeData[3]);
+
+        if (!CurrencyTotals.ContainsKey(fromCurrency))
+            CurrencyTotals.Add(fromCurrency, fromAmount);
+        else
+            CurrencyTotals[fromCurrency] += fromAmount;
+
+        var trade = new Trade()
+        {
+            Symbol = incomeData[2],
+            Date = incomeData[0],
+            fromCurrency = string.Empty,
+            PricePaid = 0,
+            CoinPrice = fromAmount / double.Parse(incomeData[7]),
+            coinQuantity = double.Parse(incomeData[3])
+        };
+
+        if (!tradeMap.ContainsKey(trade.Symbol))
+            tradeMap.Add(trade.Symbol, new List<Trade>());
+
+        tradeMap[trade.Symbol].Add(trade);
+    }
+
+    private void HandleVibanPurchase(string[] vibanPurchaseData)
+    {
+        var fromCurrency = vibanPurchaseData[2].Trim();
+        var toCurrency = vibanPurchaseData[4].Trim();
+        var fromAmount = fromCurrency == "EUR" ? -1 * double.Parse(vibanPurchaseData[3]) : double.Parse(vibanPurchaseData[3]);
+        var toAmount = double.Parse(vibanPurchaseData[5]);
+
+        if (!CurrencyTotals.ContainsKey(fromCurrency))
+            CurrencyTotals.Add(fromCurrency, fromAmount);
+        else
+            CurrencyTotals[fromCurrency] += fromAmount;
+
+        if (!CurrencyTotals.ContainsKey(toCurrency))
+            CurrencyTotals.Add(toCurrency, toAmount);
+        else
+            CurrencyTotals[toCurrency] += toAmount;
+
+        var trade = new Trade()
+        {
+            Symbol = toCurrency,
+            Date = vibanPurchaseData[0],
+            fromCurrency = fromCurrency,
+            PricePaid = double.Parse(vibanPurchaseData[7]),
+            CoinPrice = fromAmount / toAmount,
+            coinQuantity = toAmount
+        };
+
+        if (!tradeMap.ContainsKey(trade.Symbol))
+            tradeMap.Add(trade.Symbol, new List<Trade>());
+
+        tradeMap[trade.Symbol].Add(trade);
+    }
+
+    public double GetCurrencyTotal(string symbol)
+    {
+        if (!CurrencyTotals.ContainsKey(symbol))
+            return 0;
+        return CurrencyTotals[symbol];
+    }
+
+    public double GetPercentageDifference()
+    {
+        double totalWorth = 0;
+        foreach (var c in trackedCoins.Keys)
+        {
+            var coin = trackedCoins[c];
+            totalWorth += coin.CurrentPrice * GetCurrencyTotal(coin.symbol);
+        }
+
+        return totalWorth / TotalSpend;
     }
 
     public List<Trade> GetCoinTradeHistory(string symbol)
@@ -271,6 +339,7 @@ public class Trade
 {
     public string Symbol;
     public string Date;
+    public string fromCurrency;
     public double PricePaid;
     public double coinQuantity;
     public double CoinPrice;

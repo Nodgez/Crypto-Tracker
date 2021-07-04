@@ -1,50 +1,271 @@
 Timestamp (UTC),Transaction Description,Currency,Amount,To Currency,To Amount,Native Currency,Native Amount,Native Amount (in USD),Transaction Kind
-2021-04-16 18:49:55,Card Cashback,CRO,7.50586877,,,EUR,1.47,1.7665495974,referral_card_cashback
-2021-04-16 16:57:20,Card Cashback,CRO,1.4475145,,,EUR,0.28,0.3364856376,referral_card_cashback
-2021-04-16 00:35:39,Crypto Earn,ADA,0.10402192,,,EUR,0.13,0.1562254746,crypto_earn_interest_paid
-2021-04-15 01:01:57,Crypto Earn,BTC,0.00000446,,,EUR,0.23,0.2763989166,crypto_earn_interest_paid
-2021-04-14 05:38:44,Supercharger Deposit (via app),CRO,-698.13,,,EUR,-135.75,-163.135447515,supercharger_deposit
-2021-04-14 05:37:26,Convert Dust,CRO,680.766448285958209186,,,EUR,132.37,159.0735851754,dust_conversion_credited
-2021-04-14 05:37:26,Convert Dust,ENJ,-54.7,,,EUR,-133.79,-160.7800480518,dust_conversion_debited
-2021-04-12 15:53:35,Card Cashback,CRO,17.37017404,,,EUR,3.01,3.6172206042,referral_card_cashback
-2021-04-11 00:15:18,Crypto Earn,ADA,0.15001096,,,EUR,0.15,0.180260163,crypto_earn_interest_paid
-2021-04-09 00:23:13,Crypto Earn,ADA,0.10402192,,,EUR,0.1,0.120173442,crypto_earn_interest_paid
-2021-04-08 00:25:45,Crypto Earn,BTC,0.00000446,,,EUR,0.21,0.2523642282,crypto_earn_interest_paid
-2021-04-07 10:48:35,EUR -> ENJ,EUR,-100.06,ENJ,54.7,EUR,100.06,120.2455460652,viban_purchase
-2021-04-04 21:33:53,Crypto Earn Deposit,ADA,-391.1,,,EUR,-386.78,-464.8068389676,crypto_earn_program_created
-2021-04-04 21:15:58,EUR -> ADA,EUR,-150.19,ADA,147.4,EUR,150.19,180.4884925398,viban_purchase
-2021-04-02 08:10:08,Supercharger Deposit (via app),CRO,-125.72,,,EUR,-22.18,-26.6544694356,supercharger_deposit
-2021-04-02 06:19:38,Convert Dust,CRO,121.825612009668628784,,,EUR,21.53,25.8733420626,dust_conversion_credited
-2021-04-02 06:19:38,Convert Dust,XLM,-58.4,,,EUR,-21.8,-26.197810356,dust_conversion_debited
-2021-04-02 00:31:45,Crypto Earn,ADA,0.10402192,,,EUR,0.1,0.120173442,crypto_earn_interest_paid
-2021-04-01 00:54:30,Crypto Earn,BTC,0.00000446,,,EUR,0.22,0.2643815724,crypto_earn_interest_paid
-2021-03-31 08:35:28,EUR -> GLM,EUR,-97.3,GLM,186.0,EUR,97.3,116.928759066,viban_purchase
-2021-03-31 08:28:38,EUR -> ADA,EUR,-204.19,ADA,200.0,EUR,204.19,245.3821512198,viban_purchase
-2021-03-30 14:45:34,Card Cashback,CRO,2.33263655,,,EUR,0.43,0.5167458006,referral_card_cashback
-2021-03-30 14:06:06,Card Cashback,CRO,1.46496591,,,EUR,0.27,0.3244682934,referral_card_cashback
-2021-03-30 11:59:38,Card Cashback,CRO,0.04501164,,,EUR,0.01,0.0120173442,referral_card_cashback
-2021-03-30 11:58:36,Card Cashback,CRO,0.04497083,,,EUR,0.01,0.0120173442,referral_card_cashback
-2021-03-30 05:48:45,EUR -> HOT,EUR,-98.26,HOT,8000.0,EUR,98.26,118.0824241092,viban_purchase
-2021-03-29 16:16:36,Supercharger Deposit (via app),CRO,-850.1,,,EUR,-150.89,-181.3297066338,supercharger_deposit
-2021-03-26 00:04:44,Crypto Earn,ADA,0.10402192,,,EUR,0.1,0.120173442,crypto_earn_interest_paid
-2021-03-25 20:35:05,EUR -> CRO,EUR,-58.89,CRO,342.74,EUR,58.89,70.7701399938,viban_purchase
-2021-03-25 20:33:46,EUR -> ETH,EUR,-145.67,ETH,0.105,EUR,145.67,175.0566529614,viban_purchase
-2021-03-25 06:05:55,Crypto Earn Deposit,BTC,-0.00517,,,EUR,-228.72,-274.8606965424,crypto_earn_program_created
-2021-03-25 06:04:53,XLM -> BTC,XLM,-58.5,BTC,0.0004,EUR,17.75,21.330785955,crypto_exchange
-2021-03-24 22:42:41,EUR -> CRO,EUR,-89.32,CRO,500.0,EUR,89.32,107.3389183944,viban_purchase
-2021-03-24 22:39:58,EUR -> GLM,EUR,-191.1,GLM,475.0,EUR,191.1,229.651447662,viban_purchase
-2021-03-24 22:00:11,EUR -> BTC,EUR,-115.09,BTC,0.0025,EUR,115.09,138.3076143978,viban_purchase
-2021-03-22 17:54:26,Supercharger Deposit (via app),CRO,-542.26,,,EUR,-100.15,-120.353702163,supercharger_deposit
-2021-03-19 01:10:00,Crypto Earn,ADA,0.10402192,,,EUR,0.11,0.1321907862,crypto_earn_interest_paid
-2021-03-15 22:14:55,EUR -> ADA,EUR,-38.42,ADA,43.4,EUR,38.42,46.1706364164,viban_purchase
-2021-03-15 22:14:17,RVN -> EUR,RVN,-200.0,EUR,38.41,EUR,38.41,46.1586190722,crypto_viban_exchange
-2021-03-12 11:20:58,Crypto Earn Deposit,ADA,-271.2,,,EUR,-243.48,-292.5982965816,crypto_earn_program_created
-2021-03-12 11:19:26,EUR -> ADA,EUR,-149.92,ADA,161.2,EUR,149.92,180.1640242464,viban_purchase
-2021-03-01 07:38:30,CRO -> RVN,CRO,-232.870764,RVN,200.0,EUR,26.03,31.2811469526,crypto_exchange
-2021-02-27 15:32:27,Supercharger Deposit (via app),CRO,-100.0,,,EUR,-12.21,-14.6731772682,supercharger_deposit
-2021-02-24 19:15:29,EUR -> CRO,EUR,-57.35,CRO,432.5,EUR,57.35,68.919468987,viban_purchase
-2021-02-24 19:14:44,EUR -> GLM,EUR,-46.08,GLM,150.0,EUR,46.08,55.3759220736,viban_purchase
-2021-02-24 19:00:49,EUR -> ADA,EUR,-96.58,ADA,110.0,EUR,96.58,116.0635102836,viban_purchase
-2021-02-19 14:23:27,EUR -> XLM,EUR,-49.96,XLM,116.9,EUR,49.96,60.0386516232,viban_purchase
-2021-02-19 14:10:22,EUR -> CRO,EUR,-49.99,CRO,450.0,EUR,49.99,60.0747036558,viban_purchase
-2021-02-19 14:08:40,EUR -> BTC,EUR,-100.04,BTC,0.00227,EUR,100.04,120.2215113768,viban_purchase
+2021-06-25 07:01:43,Withdraw ETH,ETH,-0.01614982,,,EUR,-26.24,-31.4253412416,crypto_withdrawal
+2021-06-25 07:00:54,EUR -> ETH,EUR,-26.6,ETH,0.016,EUR,26.6,31.856481594,viban_purchase
+2021-06-25 06:45:44,Withdraw ENJ (ERC20),ENJ,-450.0,,,EUR,-391.75,-469.1645362575,crypto_withdrawal
+2021-06-25 05:59:22,EUR -> ENJ,EUR,-11.88,ENJ,13.2,EUR,11.88,14.2276316292,viban_purchase
+2021-06-25 02:15:06,Card Cashback,CRO,4.12656906,,,EUR,0.36,0.4311403524,referral_card_cashback
+2021-06-24 21:49:56,Withdraw CRO,CRO,-517.80170372,,,EUR,-43.34,-51.9045079806,crypto_withdrawal
+2021-06-24 21:48:50,EUR -> CRO,EUR,-42.83,CRO,500.0,EUR,42.83,51.2937258147,viban_purchase
+2021-06-24 21:14:23,EUR -> ENJ,EUR,-199.09,ENJ,220.0,EUR,199.09,238.4325909981,viban_purchase
+2021-06-24 01:04:59,Crypto Earn,ADA,0.03846164,,,EUR,0.04,0.0479044836,crypto_earn_interest_paid
+2021-06-23 19:49:54,Card Cashback,CRO,2.98305015,,,EUR,0.24,0.2874269016,referral_card_cashback
+2021-06-23 07:58:24,Crypto Earn Deposit,BTC,-0.016864,,,EUR,-474.87,-568.7100531783,crypto_earn_program_created
+2021-06-23 06:47:57,Crypto Earn Deposit,BTC,-0.0107983,,,EUR,-302.58,-362.3734661922,crypto_earn_program_created
+2021-06-23 06:46:29,Crypto Earn Withdrawal,BTC,0.016864,,,EUR,475.11,568.9974800799,crypto_earn_program_withdrawn
+2021-06-23 06:10:01,Crypto Earn Withdrawal,BTC,0.00517,,,EUR,146.31,175.2226248879,crypto_earn_program_withdrawn
+2021-06-23 00:44:58,Crypto Earn,BTC,0.00000382,,,EUR,0.11,0.1317373299,crypto_earn_interest_paid
+2021-06-22 00:49:09,EUR -> ADA,EUR,-50.04,ADA,50.19,EUR,50.04,59.9285089836,viban_purchase
+2021-06-21 10:10:53,EUR -> ENJ,EUR,-19.94,ENJ,20.9,EUR,19.94,23.8803850746,viban_purchase
+2021-06-21 09:13:34,Card Cashback,CRO,14.61405778,,,EUR,1.2,1.437134508,referral_card_cashback
+2021-06-21 08:52:49,Card Cashback,CRO,0.20459579,,,EUR,0.02,0.0239522418,referral_card_cashback
+2021-06-21 05:23:42,Withdraw CRO,CRO,-100.76509599,,,EUR,-8.4,-10.059941556,crypto_withdrawal
+2021-06-21 05:21:43,EUR -> CRO,EUR,-8.42,CRO,98.76,EUR,8.42,10.0838937978,viban_purchase
+2021-06-21 00:31:25,Crypto Earn,ETH,0.00014982,,,EUR,0.28,0.3353313852,crypto_earn_interest_paid
+2021-06-20 17:00:03,Crypto Earn Withdrawal,BTC,0.005611,,,EUR,161.8,193.773636162,crypto_earn_program_withdrawn
+2021-06-20 12:35:31,EUR -> ENJ,EUR,-29.64,ENJ,30.0,EUR,29.64,35.4972223476,viban_purchase
+2021-06-20 11:02:21,EUR -> ENJ,EUR,-19.92,ENJ,20.0,EUR,19.92,23.8564328328,viban_purchase
+2021-06-20 00:55:28,Crypto Earn,BTC,0.00000092,,,EUR,0.03,0.0359283627,crypto_earn_interest_paid
+2021-06-20 00:55:27,Crypto Earn,ADA,0.15001096,,,EUR,0.17,0.2035940553,crypto_earn_interest_paid
+2021-06-19 19:37:07,Card Cashback,CRO,2.00509599,,,EUR,0.18,0.2155701762,referral_card_cashback
+2021-06-19 14:01:44,Withdraw CRO,CRO,-133.0829272,,,EUR,-12.11,-14.5030824099,crypto_withdrawal
+2021-06-19 13:59:58,Card Cashback,CRO,4.27577733,,,EUR,0.4,0.479044836,referral_card_cashback
+2021-06-19 11:33:30,Card Cashback,CRO,5.64968957,,,EUR,0.52,0.6227582868,referral_card_cashback
+2021-06-19 11:27:02,Card Cashback,CRO,1.55166753,,,EUR,0.14,0.1676656926,referral_card_cashback
+2021-06-19 11:27:02,Card Rebate: Spotify,CRO,118.56565416,,,EUR,10.98,13.1497807482,reimbursement
+2021-06-19 09:41:45,Card Cashback,CRO,1.7441411,,,EUR,0.16,0.1916179344,referral_card_cashback
+2021-06-19 09:28:10,Card Cashback,CRO,1.10472381,,,EUR,0.1,0.119761209,referral_card_cashback
+2021-06-19 01:05:29,Crypto Earn,BTC,0.00000416,,,EUR,0.12,0.1437134508,crypto_earn_interest_paid
+2021-06-18 19:46:26,Card Cashback,CRO,0.1912737,,,EUR,0.02,0.0239522418,referral_card_cashback
+2021-06-18 00:49:46,Crypto Earn,BTC,0.00000323,,,EUR,0.1,0.119761209,crypto_earn_interest_paid
+2021-06-17 21:57:42,Withdraw CRO,CRO,-44.25594498,,,EUR,-4.11,-4.9221856899,crypto_withdrawal
+2021-06-17 16:07:56,Card Cashback,CRO,4.73666597,,,EUR,0.46,0.5509015614,referral_card_cashback
+2021-06-17 00:16:37,Crypto Earn,BTC,0.00000446,,,EUR,0.14,0.1676656926,crypto_earn_interest_paid
+2021-06-17 00:16:36,Crypto Earn,ADA,0.03296712,,,EUR,0.04,0.0479044836,crypto_earn_interest_paid
+2021-06-16 08:07:50,Card Cashback,CRO,39.51927901,,,EUR,4.0,4.79044836,referral_card_cashback
+2021-06-15 19:51:54,Withdraw CRO,CRO,-15.36162579,,,EUR,-1.45,-1.7365375305,crypto_withdrawal
+2021-06-15 15:52:56,Card Cashback,CRO,6.89934366,,,EUR,0.67,0.8024001003,referral_card_cashback
+2021-06-14 18:21:24,Card Cashback,CRO,8.46228213,,,EUR,0.84,1.0059941556,referral_card_cashback
+2021-06-14 13:18:50,Crypto Earn Deposit,ETH,-0.1736,,,EUR,-357.92,-428.6493192528,crypto_earn_program_created
+2021-06-14 13:17:44,EUR -> ETH,EUR,-151.02,ETH,0.0716,EUR,151.02,180.8633778318,viban_purchase
+2021-06-14 13:14:14,Withdraw CRO,CRO,-1021.97710892,,,EUR,-99.97,-119.7252806373,crypto_withdrawal
+2021-06-14 13:11:10,EUR -> CRO,EUR,-99.83,CRO,1000.0,EUR,99.83,119.5576149447,viban_purchase
+2021-06-14 09:38:00,Card Cashback,CRO,8.98922576,,,EUR,0.89,1.0658747601,referral_card_cashback
+2021-06-13 18:11:33,Card Cashback,CRO,1.61781033,,,EUR,0.16,0.1916179344,referral_card_cashback
+2021-06-13 10:51:58,Card Cashback,CRO,3.50216608,,,EUR,0.33,0.3952119897,referral_card_cashback
+2021-06-13 00:46:52,Crypto Earn,ADA,0.15001096,,,EUR,0.18,0.2155701762,crypto_earn_interest_paid
+2021-06-12 18:41:06,Card Cashback,CRO,5.54520219,,,EUR,0.52,0.6227582868,referral_card_cashback
+2021-06-12 06:32:22,Crypto Earn Deposit,BTC,-0.016864,,,EUR,-485.89,-581.9077384101,crypto_earn_program_created
+2021-06-12 05:32:35,EUR -> ENJ,EUR,-99.59,ENJ,100.0,EUR,99.59,119.2701880431,viban_purchase
+2021-06-12 05:30:00,EUR -> BTC,EUR,-399.56,BTC,0.0135,EUR,399.56,478.5178866804,viban_purchase
+2021-06-11 11:05:23,Card Cashback,CRO,1.07213359,,,EUR,0.11,0.1317373299,referral_card_cashback
+2021-06-11 00:50:34,Crypto Earn,BTC,0.00000323,,,EUR,0.1,0.119761209,crypto_earn_interest_paid
+2021-06-10 19:50:57,Card Cashback,CRO,0.4233834,,,EUR,0.04,0.0479044836,referral_card_cashback
+2021-06-10 12:51:11,Crypto Earn Deposit,ADA,-401.1,,,EUR,-509.71,-610.4348583939,crypto_earn_program_created
+2021-06-10 11:25:03,Crypto Earn Withdrawal,ADA,271.2,,,EUR,348.04,416.8169118036,crypto_earn_program_withdrawn
+2021-06-10 09:30:11,EUR -> ENJ,EUR,-49.91,ENJ,45.9,EUR,49.91,59.7728194119,viban_purchase
+2021-06-10 00:35:25,Crypto Earn,BTC,0.00000446,,,EUR,0.13,0.1556895717,crypto_earn_interest_paid
+2021-06-10 00:35:24,Crypto Earn,ADA,0.08916164,,,EUR,0.12,0.1437134508,crypto_earn_interest_paid
+2021-06-09 20:54:58,Card Cashback,CRO,0.82718757,,,EUR,0.08,0.0958089672,referral_card_cashback
+2021-06-09 19:56:40,Withdraw CRO,CRO,-6.24868539,,,EUR,-0.61,-0.7305433749,crypto_withdrawal
+2021-06-09 17:40:58,Card Cashback,CRO,6.24868539,,,EUR,0.63,0.7544956167,referral_card_cashback
+2021-06-08 20:37:16,Withdraw CRO,CRO,-15.31540806,,,EUR,-1.4,-1.676656926,crypto_withdrawal
+2021-06-08 16:07:19,Card Cashback,CRO,15.3073512,,,EUR,1.4,1.676656926,referral_card_cashback
+2021-06-07 19:07:40,Withdraw CRO,CRO,-27.311,,,EUR,-2.73,-3.2694810057,crypto_withdrawal
+2021-06-07 15:18:23,Card Cashback,CRO,2.11618296,,,EUR,0.22,0.2634746598,referral_card_cashback
+2021-06-07 15:02:38,Card Cashback,CRO,2.51560221,,,EUR,0.26,0.3113791434,referral_card_cashback
+2021-06-07 09:12:13,Card Cashback,CRO,15.27861551,,,EUR,1.6,1.916179344,referral_card_cashback
+2021-06-06 18:30:05,Card Cashback,CRO,1.94465233,,,EUR,0.2,0.239522418,referral_card_cashback
+2021-06-06 16:14:02,Card Cashback,CRO,0.88739485,,,EUR,0.09,0.1077850881,referral_card_cashback
+2021-06-06 10:29:57,Card Cashback,CRO,2.48011873,,,EUR,0.25,0.2994030225,referral_card_cashback
+2021-06-06 07:02:39,EUR -> BTC,EUR,-44.88,BTC,0.0015,EUR,44.88,53.7488305992,viban_purchase
+2021-06-06 01:04:10,Crypto Earn,ADA,0.15001096,,,EUR,0.2,0.239522418,crypto_earn_interest_paid
+2021-06-05 09:55:44,Card Cashback,CRO,1.70532211,,,EUR,0.17,0.2035940553,referral_card_cashback
+2021-06-05 09:47:17,Card Cashback,CRO,0.31906564,,,EUR,0.03,0.0359283627,referral_card_cashback
+2021-06-04 20:18:44,Withdraw CRO,CRO,-14.001,,,EUR,-1.38,-1.6527046842,crypto_withdrawal
+2021-06-04 19:09:49,Card Cashback,CRO,2.50653301,,,EUR,0.26,0.3113791434,referral_card_cashback
+2021-06-04 06:53:54,Card Cashback Reversal,CRO,-3.62993318,,,EUR,-0.4,-0.479044836,card_cashback_reverted
+2021-06-04 00:28:04,Crypto Earn,BTC,0.00000323,,,EUR,0.1,0.119761209,crypto_earn_interest_paid
+2021-06-04 00:28:04,Crypto Earn,ADA,0.10402192,,,EUR,0.15,0.1796418135,crypto_earn_interest_paid
+2021-06-03 17:08:59,Card Cashback,CRO,0.82340838,,,EUR,0.09,0.1077850881,referral_card_cashback
+2021-06-03 12:55:06,Card Cashback,CRO,6.47440154,,,EUR,0.72,0.8622807048,referral_card_cashback
+2021-06-03 12:16:24,Card Cashback,CRO,1.6463211,,,EUR,0.18,0.2155701762,referral_card_cashback
+2021-06-03 06:41:53,Card Cashback,CRO,3.62993318,,,EUR,0.4,0.479044836,referral_card_cashback
+2021-06-03 00:59:52,Crypto Earn,BTC,0.00000446,,,EUR,0.14,0.1676656926,crypto_earn_interest_paid
+2021-06-02 20:07:42,Card Cashback,CRO,2.57296749,,,EUR,0.28,0.3353313852,referral_card_cashback
+2021-06-01 16:51:56,Withdraw CRO,CRO,-24.401,,,EUR,-2.35,-2.8143884115,crypto_withdrawal
+2021-06-01 16:25:42,Card Cashback,CRO,5.18497514,,,EUR,0.52,0.6227582868,referral_card_cashback
+2021-06-01 15:57:27,Card Cashback,CRO,2.06453461,,,EUR,0.2,0.239522418,referral_card_cashback
+2021-06-01 12:51:27,Card Cashback,CRO,1.96823515,,,EUR,0.2,0.239522418,referral_card_cashback
+2021-06-01 08:17:36,Card Cashback,CRO,4.00458978,,,EUR,0.4,0.479044836,referral_card_cashback
+2021-05-31 11:55:55,Card Cashback,CRO,7.14843973,,,EUR,0.74,0.8862329466,referral_card_cashback
+2021-05-30 16:30:29,Card Cashback,CRO,0.43807946,,,EUR,0.04,0.0479044836,referral_card_cashback
+2021-05-30 15:56:41,Card Cashback,CRO,2.12790075,,,EUR,0.2,0.239522418,referral_card_cashback
+2021-05-30 14:08:00,Card Cashback,CRO,1.49447268,,,EUR,0.14,0.1676656926,referral_card_cashback
+2021-05-30 10:36:41,Withdraw CRO,CRO,-158.5,,,EUR,-14.68,-17.5809454812,crypto_withdrawal
+2021-05-30 10:34:49,EUR -> CRO,EUR,-15.02,CRO,158.48,EUR,15.02,17.9881335918,viban_purchase
+2021-05-30 00:10:39,Crypto Earn,ADA,0.15001096,,,EUR,0.17,0.2035940553,crypto_earn_interest_paid
+2021-05-29 21:03:21,EUR -> BTC,EUR,-52.53,BTC,0.001841,EUR,52.53,62.9105630877,viban_purchase
+2021-05-29 19:07:59,Withdraw CRO,CRO,-17.9,,,EUR,-1.58,-1.8922271022,crypto_withdrawal
+2021-05-29 13:45:55,Card Cashback,CRO,4.25314731,,,EUR,0.39,0.4670687151,referral_card_cashback
+2021-05-29 13:00:37,EUR -> ADA,EUR,-50.18,ADA,42.0,EUR,50.18,60.0961746762,viban_purchase
+2021-05-28 17:36:37,Card Cashback,CRO,2.91499472,,,EUR,0.28,0.3353313852,referral_card_cashback
+2021-05-28 17:11:32,Card Cashback,CRO,0.7711509,,,EUR,0.07,0.0838328463,referral_card_cashback
+2021-05-28 12:48:10,Card Cashback,CRO,5.05629794,,,EUR,0.5,0.598806045,referral_card_cashback
+2021-05-28 07:01:12,Card Cashback,CRO,4.84686968,,,EUR,0.49,0.5868299241,referral_card_cashback
+2021-05-28 01:02:44,Crypto Earn,BTC,0.00000323,,,EUR,0.1,0.119761209,crypto_earn_interest_paid
+2021-05-28 01:02:44,Crypto Earn,ADA,0.10402192,,,EUR,0.14,0.1676656926,crypto_earn_interest_paid
+2021-05-27 19:22:29,Withdraw CRO,CRO,-906.8,,,EUR,-95.5,-114.371954595,crypto_withdrawal
+2021-05-27 19:07:44,EUR -> CRO,EUR,-97.27,CRO,900.0,EUR,97.27,116.4917279943,viban_purchase
+2021-05-27 18:48:52,Card Cashback,CRO,0.68446498,,,EUR,0.07,0.0838328463,referral_card_cashback
+2021-05-27 01:05:00,Crypto Earn,BTC,0.00000446,,,EUR,0.14,0.1676656926,crypto_earn_interest_paid
+2021-05-25 17:03:17,Card Cashback,CRO,5.82410594,,,EUR,0.58,0.6946150122,referral_card_cashback
+2021-05-25 12:03:08,Withdraw CRO,CRO,-22.001,,,EUR,-2.11,-2.5269615099,crypto_withdrawal
+2021-05-25 12:00:24,Convert Dust,CRO,0.012688505,,,EUR,0.0,0,dust_conversion_credited
+2021-05-25 12:00:24,Convert Dust,DOGE,-0.0046602,,,EUR,0.0,0,dust_conversion_debited
+2021-05-25 12:00:01,Transfer: Exchange -> App wallet,DOGE,0.0046602,,,EUR,0.0,0,exchange_to_crypto_transfer
+2021-05-25 03:30:13,Card Cashback,CRO,3.50354003,,,EUR,0.36,0.4311403524,referral_card_cashback
+2021-05-24 17:17:32,Card Cashback,CRO,3.49306203,,,EUR,0.34,0.4071881106,referral_card_cashback
+2021-05-23 14:11:20,EUR -> ADA,EUR,-48.81,ADA,50.0,EUR,48.81,58.4554461129,viban_purchase
+2021-05-23 10:52:55,Card Cashback,CRO,1.49454699,,,EUR,0.13,0.1556895717,referral_card_cashback
+2021-05-23 10:33:38,Card Cashback,CRO,1.21466168,,,EUR,0.11,0.1317373299,referral_card_cashback
+2021-05-23 09:43:56,EUR -> ADA,EUR,-39.92,ADA,37.1,EUR,39.92,47.8086746328,viban_purchase
+2021-05-23 01:01:15,Crypto Earn,ADA,0.15001096,,,EUR,0.18,0.2155701762,crypto_earn_interest_paid
+2021-05-22 17:33:56,Card Cashback,CRO,5.17255765,,,EUR,0.51,0.6107821659,referral_card_cashback
+2021-05-22 13:38:44,Card Cashback,CRO,7.01635559,,,EUR,0.71,0.8503045839,referral_card_cashback
+2021-05-22 09:01:12,Withdraw CRO,CRO,-250.001,,,EUR,-23.72,-28.4073587748,crypto_withdrawal
+2021-05-22 08:59:37,EUR -> CRO,EUR,-18.99,CRO,195.43,EUR,18.99,22.7426535891,viban_purchase
+2021-05-21 17:18:01,Card Cashback,CRO,4.518685,,,EUR,0.46,0.5509015614,referral_card_cashback
+2021-05-21 16:55:23,Crypto Earn Deposit,BTC,-0.005611,,,EUR,-168.34,-201.6060192306,crypto_earn_program_created
+2021-05-21 16:54:03,EUR -> BTC,EUR,-31.01,BTC,0.001,EUR,31.01,37.1379509109,viban_purchase
+2021-05-21 16:47:48,Card Cashback,CRO,44.39639585,,,EUR,4.54,5.4371588886,referral_card_cashback
+2021-05-21 08:33:12,Card Cashback Reversal,CRO,-0.15543217,,,EUR,-0.02,-0.0239522418,card_cashback_reverted
+2021-05-21 03:35:04,Crypto Earn,ADA,0.10402192,,,EUR,0.15,0.1796418135,crypto_earn_interest_paid
+2021-05-20 14:49:20,Withdraw ADA,ADA,-112.4,,,EUR,-169.36,-202.8275835624,crypto_withdrawal
+2021-05-20 08:27:29,Card Cashback,CRO,1.020687,,,EUR,0.11,0.1317373299,referral_card_cashback
+2021-05-20 08:23:18,Card Cashback,CRO,4.62170204,,,EUR,0.48,0.5748538032,referral_card_cashback
+2021-05-20 00:38:16,Crypto Earn,BTC,0.00000446,,,EUR,0.13,0.1556895717,crypto_earn_interest_paid
+2021-05-19 19:49:01,Card Cashback,CRO,0.15543217,,,EUR,0.02,0.0239522418,referral_card_cashback
+2021-05-19 14:46:18,Withdraw CRO,CRO,-103.001,,,EUR,-9.43,-11.2934820087,crypto_withdrawal
+2021-05-19 11:26:58,Card Cashback,CRO,0.78373863,,,EUR,0.08,0.0958089672,referral_card_cashback
+2021-05-19 11:26:58,Card Rebate: Spotify,CRO,101.80764817,,,EUR,10.68,12.7904971212,reimbursement
+2021-05-19 08:27:49,Withdraw CRO,CRO,-23.001,,,EUR,-2.47,-2.9581018623,crypto_withdrawal
+2021-05-18 19:01:44,Card Cashback,CRO,3.40003402,,,EUR,0.41,0.4910209569,referral_card_cashback
+2021-05-18 08:24:24,Card Cashback,CRO,3.25638844,,,EUR,0.4,0.479044836,referral_card_cashback
+2021-05-17 18:14:30,Card Cashback,CRO,9.60650571,,,EUR,1.13,1.3533016617,referral_card_cashback
+2021-05-17 12:47:24,Card Cashback,CRO,2.40320808,,,EUR,0.3,0.359283627,referral_card_cashback
+2021-05-16 00:14:31,Crypto Earn,ADA,0.15001096,,,EUR,0.27,0.3233552643,crypto_earn_interest_paid
+2021-05-15 10:24:58,Card Cashback,CRO,4.4782366,,,EUR,0.59,0.7065911331,referral_card_cashback
+2021-05-14 15:08:16,Withdraw CRO,CRO,-12.001,,,EUR,-1.64,-1.9640838276,crypto_withdrawal
+2021-05-14 13:13:24,Card Cashback,CRO,0.71197837,,,EUR,0.1,0.119761209,referral_card_cashback
+2021-05-14 13:04:57,Card Cashback,CRO,1.00816753,,,EUR,0.14,0.1676656926,referral_card_cashback
+2021-05-14 00:57:10,Crypto Earn,ADA,0.10402192,,,EUR,0.16,0.1916179344,crypto_earn_interest_paid
+2021-05-13 19:49:10,Card Cashback,CRO,1.15344697,,,EUR,0.15,0.1796418135,referral_card_cashback
+2021-05-13 16:38:50,Card Cashback,CRO,4.95695151,,,EUR,0.66,0.7904239794,referral_card_cashback
+2021-05-13 16:13:33,Card Cashback,CRO,2.71349539,,,EUR,0.36,0.4311403524,referral_card_cashback
+2021-05-13 12:20:11,Withdraw CRO,CRO,-755.0,,,EUR,-96.94,-116.0965160046,crypto_withdrawal
+2021-05-13 12:16:05,EUR -> BTC,EUR,-101.66,BTC,0.002426,EUR,101.66,121.7492450694,viban_purchase
+2021-05-13 12:14:50,EUR -> CRO,EUR,-98.28,CRO,750.0,EUR,98.28,117.7013162052,viban_purchase
+2021-05-13 08:54:44,Card Cashback,CRO,0.62247827,,,EUR,0.08,0.0958089672,referral_card_cashback
+2021-05-13 01:04:05,Crypto Earn,BTC,0.00000446,,,EUR,0.18,0.2155701762,crypto_earn_interest_paid
+2021-05-12 17:37:32,Card Cashback,CRO,3.94561713,,,EUR,0.56,0.6706627704,referral_card_cashback
+2021-05-12 10:55:27,EUR -> BTC,EUR,-100.41,BTC,0.00215,EUR,100.41,120.2522299569,viban_purchase
+2021-05-12 08:53:07,Withdraw CRO,CRO,-1065.0,,,EUR,-151.8,-181.797515262,crypto_withdrawal
+2021-05-12 08:21:41,Supercharger Withdrawal (via app),CRO,1064.26,,,EUR,152.13,182.1927272517,supercharger_withdrawal
+2021-05-10 21:27:50,Crypto Earn,ADA,0.15001096,,,EUR,0.2,0.239522418,crypto_earn_interest_paid
+2021-05-10 20:24:19,Card Cashback,CRO,3.39043504,,,EUR,0.45,0.5389254405,referral_card_cashback
+2021-05-10 17:02:38,Withdraw CRO,CRO,-73.29219856,,,EUR,-10.2,-12.215643318,crypto_withdrawal
+2021-05-10 16:58:38,CRO Stake,CRO,-2453.0,,,EUR,-350.16,-419.3558494344,lockup_lock
+2021-05-10 16:57:44,ETH -> EUR,ETH,-0.003,,,EUR,-10.0,-11.9761209,card_top_up
+2021-05-10 16:46:46,Supercharger Withdrawal (via app),CRO,2520.0,,,EUR,352.27,421.8828109443,supercharger_withdrawal
+2021-05-10 16:44:04,Transfer: Exchange -> App wallet,CRO,5.30115057,,,EUR,0.74,0.8862329466,exchange_to_crypto_transfer
+2021-05-08 14:45:23,Card Cashback,CRO,0.41808833,,,EUR,0.07,0.0838328463,referral_card_cashback
+2021-05-08 14:16:15,Card Cashback,CRO,0.10468712,,,EUR,0.02,0.0239522418,referral_card_cashback
+2021-05-08 13:15:20,Card Cashback,CRO,0.36391497,,,EUR,0.06,0.0718567254,referral_card_cashback
+2021-05-08 13:05:09,Card Cashback,CRO,0.10435757,,,EUR,0.02,0.0239522418,referral_card_cashback
+2021-05-07 15:14:35,Withdraw CRO,CRO,-53.81897888,,,EUR,-8.31,-9.9521564679,crypto_withdrawal
+2021-05-07 00:54:52,Crypto Earn,ADA,0.10402192,,,EUR,0.14,0.1676656926,crypto_earn_interest_paid
+2021-05-06 01:08:06,Crypto Earn,BTC,0.00000446,,,EUR,0.21,0.2514985389,crypto_earn_interest_paid
+2021-05-05 19:51:28,Card Cashback,CRO,2.13230219,,,EUR,0.33,0.3952119897,referral_card_cashback
+2021-05-05 19:42:57,Card Cashback,CRO,1.30787193,,,EUR,0.2,0.239522418,referral_card_cashback
+2021-05-04 19:47:34,Card Cashback,CRO,2.51113842,,,EUR,0.36,0.4311403524,referral_card_cashback
+2021-05-02 08:36:23,Card Cashback,CRO,0.94566809,,,EUR,0.15,0.1796418135,referral_card_cashback
+2021-05-02 00:46:43,Crypto Earn,ADA,0.15001096,,,EUR,0.16,0.1916179344,crypto_earn_interest_paid
+2021-05-01 14:49:50,Card Cashback,CRO,0.10365061,,,EUR,0.02,0.0239522418,referral_card_cashback
+2021-05-01 14:36:03,Card Cashback,CRO,3.67576577,,,EUR,0.59,0.7065911331,referral_card_cashback
+2021-04-30 18:37:26,Card Cashback,CRO,1.5810439,,,EUR,0.26,0.3113791434,referral_card_cashback
+2021-04-30 00:32:49,Crypto Earn,ADA,0.10402192,,,EUR,0.11,0.1317373299,crypto_earn_interest_paid
+2021-04-29 11:02:47,Card Cashback,CRO,5.13954067,,,EUR,0.8,0.958089672,referral_card_cashback
+2021-04-29 10:39:42,Card Cashback,CRO,0.05298496,,,EUR,0.01,0.0119761209,referral_card_cashback
+2021-04-29 09:50:30,Card Cashback,CRO,0.1060264,,,EUR,0.02,0.0239522418,referral_card_cashback
+2021-04-29 00:24:49,Crypto Earn,BTC,0.00000446,,,EUR,0.2,0.239522418,crypto_earn_interest_paid
+2021-04-27 18:38:42,Card Cashback,CRO,1.32876248,,,EUR,0.22,0.2634746598,referral_card_cashback
+2021-04-27 14:33:10,Card Cashback,CRO,18.94092546,,,EUR,3.05,3.6527168745,referral_card_cashback
+2021-04-27 11:32:45,Card Cashback,CRO,9.09282388,,,EUR,1.46,1.7485136514,referral_card_cashback
+2021-04-26 08:13:59,Withdraw ADA,ADA,-100.006427,,,EUR,-97.84,-117.1743668856,crypto_withdrawal
+2021-04-25 20:06:14,Card Cashback,CRO,2.82667361,,,EUR,0.41,0.4910209569,referral_card_cashback
+2021-04-25 19:16:39,Card Cashback,CRO,1.60871018,,,EUR,0.23,0.2754507807,referral_card_cashback
+2021-04-25 12:41:25,Card Cashback,CRO,0.87443811,,,EUR,0.12,0.1437134508,referral_card_cashback
+2021-04-25 09:03:05,Card Cashback,CRO,0.17550487,,,EUR,0.02,0.0239522418,referral_card_cashback
+2021-04-25 00:57:39,Crypto Earn,ADA,0.15001096,,,EUR,0.13,0.1556895717,crypto_earn_interest_paid
+2021-04-23 19:40:55,EUR -> ADA,EUR,-199.94,ADA,210.9,EUR,199.94,239.4505612746,viban_purchase
+2021-04-23 16:55:53,Card Cashback,CRO,1.41067746,,,EUR,0.2,0.239522418,referral_card_cashback
+2021-04-23 05:51:10,Supercharger Deposit (via app),CRO,-798.53,,,EUR,-97.26,-116.4797518734,supercharger_deposit
+2021-04-23 05:47:59,EUR -> CRO,EUR,-100.0,CRO,796.37,EUR,100.0,119.761209,viban_purchase
+2021-04-23 00:06:21,Crypto Earn,ADA,0.10402192,,,EUR,0.1,0.119761209,crypto_earn_interest_paid
+2021-04-22 18:20:32,Card Cashback,CRO,0.85583675,,,EUR,0.13,0.1556895717,referral_card_cashback
+2021-04-22 00:43:42,Crypto Earn,BTC,0.00000446,,,EUR,0.2,0.239522418,crypto_earn_interest_paid
+2021-04-20 17:18:25,Card Cashback,CRO,1.30173771,,,EUR,0.21,0.2514985389,referral_card_cashback
+2021-04-20 09:12:32,Supercharger Deposit (via app),CRO,-469.52,,,EUR,-70.5,-84.431652345,supercharger_deposit
+2021-04-20 08:44:36,EUR -> CRO,EUR,-70.0,CRO,458.24,EUR,70.0,83.8328463,viban_purchase
+2021-04-19 18:12:08,Card Cashback,CRO,0.25357665,,,EUR,0.04,0.0479044836,referral_card_cashback
+2021-04-18 10:02:35,Card Cashback,CRO,2.07088025,,,EUR,0.34,0.4071881106,referral_card_cashback
+2021-04-18 00:20:51,Crypto Earn,ADA,0.15001096,,,EUR,0.17,0.2035940553,crypto_earn_interest_paid
+2021-04-16 18:49:55,Card Cashback,CRO,7.50586877,,,EUR,1.47,1.7604897723,referral_card_cashback
+2021-04-16 16:57:20,Card Cashback,CRO,1.4475145,,,EUR,0.28,0.3353313852,referral_card_cashback
+2021-04-16 00:35:39,Crypto Earn,ADA,0.10402192,,,EUR,0.13,0.1556895717,crypto_earn_interest_paid
+2021-04-15 01:01:57,Crypto Earn,BTC,0.00000446,,,EUR,0.23,0.2754507807,crypto_earn_interest_paid
+2021-04-14 05:38:44,Supercharger Deposit (via app),CRO,-698.13,,,EUR,-135.75,-162.5758412175,supercharger_deposit
+2021-04-14 05:37:26,Convert Dust,CRO,680.766448285958209186,,,EUR,132.37,158.5279123533,dust_conversion_credited
+2021-04-14 05:37:26,Convert Dust,ENJ,-54.7,,,EUR,-133.79,-160.2285215211,dust_conversion_debited
+2021-04-12 15:53:35,Card Cashback,CRO,17.37017404,,,EUR,3.01,3.6048123909,referral_card_cashback
+2021-04-11 00:15:18,Crypto Earn,ADA,0.15001096,,,EUR,0.15,0.1796418135,crypto_earn_interest_paid
+2021-04-09 00:23:13,Crypto Earn,ADA,0.10402192,,,EUR,0.1,0.119761209,crypto_earn_interest_paid
+2021-04-08 00:25:45,Crypto Earn,BTC,0.00000446,,,EUR,0.21,0.2514985389,crypto_earn_interest_paid
+2021-04-07 10:48:35,EUR -> ENJ,EUR,-100.06,ENJ,54.7,EUR,100.06,119.8330657254,viban_purchase
+2021-04-04 21:33:53,Crypto Earn Deposit,ADA,-391.1,,,EUR,-386.78,-463.2124041702,crypto_earn_program_created
+2021-04-04 21:15:58,EUR -> ADA,EUR,-150.19,ADA,147.4,EUR,150.19,179.8693597971,viban_purchase
+2021-04-02 08:10:08,Supercharger Deposit (via app),CRO,-125.72,,,EUR,-22.18,-26.5630361562,supercharger_deposit
+2021-04-02 06:19:38,Convert Dust,CRO,121.825612009668628784,,,EUR,21.53,25.7845882977,dust_conversion_credited
+2021-04-02 06:19:38,Convert Dust,XLM,-58.4,,,EUR,-21.8,-26.107943562,dust_conversion_debited
+2021-04-02 00:31:45,Crypto Earn,ADA,0.10402192,,,EUR,0.1,0.119761209,crypto_earn_interest_paid
+2021-04-01 00:54:30,Crypto Earn,BTC,0.00000446,,,EUR,0.22,0.2634746598,crypto_earn_interest_paid
+2021-03-31 08:35:28,EUR -> GLM,EUR,-97.3,GLM,186.0,EUR,97.3,116.527656357,viban_purchase
+2021-03-31 08:28:38,EUR -> ADA,EUR,-204.19,ADA,200.0,EUR,204.19,244.5404126571,viban_purchase
+2021-03-30 14:45:34,Card Cashback,CRO,2.33263655,,,EUR,0.43,0.5149731987,referral_card_cashback
+2021-03-30 14:06:06,Card Cashback,CRO,1.46496591,,,EUR,0.27,0.3233552643,referral_card_cashback
+2021-03-30 11:59:38,Card Cashback,CRO,0.04501164,,,EUR,0.01,0.0119761209,referral_card_cashback
+2021-03-30 11:58:36,Card Cashback,CRO,0.04497083,,,EUR,0.01,0.0119761209,referral_card_cashback
+2021-03-30 05:48:45,EUR -> HOT,EUR,-98.26,HOT,8000.0,EUR,98.26,117.6773639634,viban_purchase
+2021-03-29 16:16:36,Supercharger Deposit (via app),CRO,-850.1,,,EUR,-150.89,-180.7076882601,supercharger_deposit
+2021-03-26 00:04:44,Crypto Earn,ADA,0.10402192,,,EUR,0.1,0.119761209,crypto_earn_interest_paid
+2021-03-25 20:35:05,EUR -> CRO,EUR,-58.89,CRO,342.74,EUR,58.89,70.5273759801,viban_purchase
+2021-03-25 20:33:46,EUR -> ETH,EUR,-145.67,ETH,0.105,EUR,145.67,174.4561531503,viban_purchase
+2021-03-25 06:05:55,Crypto Earn Deposit,BTC,-0.00517,,,EUR,-228.72,-273.9178372248,crypto_earn_program_created
+2021-03-25 06:04:53,XLM -> BTC,XLM,-58.5,BTC,0.0004,EUR,17.75,21.2576145975,crypto_exchange
+2021-03-24 22:42:41,EUR -> CRO,EUR,-89.32,CRO,500.0,EUR,89.32,106.9707118788,viban_purchase
+2021-03-24 22:39:58,EUR -> GLM,EUR,-191.1,GLM,475.0,EUR,191.1,228.863670399,viban_purchase
+2021-03-24 22:00:11,EUR -> BTC,EUR,-115.09,BTC,0.0025,EUR,115.09,137.8331754381,viban_purchase
+2021-03-22 17:54:26,Supercharger Deposit (via app),CRO,-542.26,,,EUR,-100.15,-119.9408508135,supercharger_deposit
+2021-03-19 01:10:00,Crypto Earn,ADA,0.10402192,,,EUR,0.11,0.1317373299,crypto_earn_interest_paid
+2021-03-15 22:14:55,EUR -> ADA,EUR,-38.42,ADA,43.4,EUR,38.42,46.0122564978,viban_purchase
+2021-03-15 22:14:17,RVN -> EUR,RVN,-200.0,EUR,38.41,EUR,38.41,46.0002803769,crypto_viban_exchange
+2021-03-12 11:20:58,Crypto Earn Deposit,ADA,-271.2,,,EUR,-243.48,-291.5945916732,crypto_earn_program_created
+2021-03-12 11:19:26,EUR -> ADA,EUR,-149.92,ADA,161.2,EUR,149.92,179.5460045328,viban_purchase
+2021-03-01 07:38:30,CRO -> RVN,CRO,-232.870764,RVN,200.0,EUR,26.03,31.1738427027,crypto_exchange
+2021-02-27 15:32:27,Supercharger Deposit (via app),CRO,-100.0,,,EUR,-12.21,-14.6228436189,supercharger_deposit
+2021-02-24 19:15:29,EUR -> CRO,EUR,-57.35,CRO,432.5,EUR,57.35,68.6830533615,viban_purchase
+2021-02-24 19:14:44,EUR -> GLM,EUR,-46.08,GLM,150.0,EUR,46.08,55.1859651072,viban_purchase
+2021-02-24 19:00:49,EUR -> ADA,EUR,-96.58,ADA,110.0,EUR,96.58,115.6653756522,viban_purchase
+2021-02-19 14:23:27,EUR -> XLM,EUR,-49.96,XLM,116.9,EUR,49.96,59.8327000164,viban_purchase
+2021-02-19 14:10:22,EUR -> CRO,EUR,-49.99,CRO,450.0,EUR,49.99,59.8686283791,viban_purchase
+2021-02-19 14:08:40,EUR -> BTC,EUR,-100.04,BTC,0.00227,EUR,100.04,119.8091134836,viban_purchase
